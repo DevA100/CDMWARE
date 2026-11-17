@@ -5,7 +5,7 @@ import { CruiseHero } from "@/components/cruise/hero";
 import { CruiseBadge } from "@/components/cruise/badge";
 import { cruiseButtonClasses } from "@/components/cruise/button";
 import { CruiseTestimonials } from "@/components/cruise/blocks/testimonials";
-import { HeroIllustration } from "@/components/site/hero-illustration";
+import { HeroGlobe } from "@/components/site/hero-globe";
 import { ArrowLink, ConsultationBand, SectionHeading } from "@/components/site/sections";
 import { audienceIcons, IconChip, serviceIcons } from "@/components/site/icons";
 import { home, seo, testimonials } from "@/content/site";
@@ -46,7 +46,7 @@ export default function HomePage() {
             </Link>
           </>
         }
-        illustration={<HeroIllustration />}
+        illustration={<HeroGlobe />}
         ghostWord="CDM"
       />
 
