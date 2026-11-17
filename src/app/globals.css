@@ -1,26 +1,114 @@
 @import "tailwindcss";
+@import "./cruise-ui.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/*
+ * CDMWare brand on top of Cruise UI.
+ * Brand colours from the existing site and logo:
+ *   Navy  #0F0F47  (primary text, "WARE", dark sections)
+ *   Gold  #DBAE25  ("CDM", highlights, primary buttons)
+ *   Sky   #D2EDF8  (soft accent panels)
+ */
+@layer base {
+  .cruise {
+    --brand-navy: #0f0f47;
+    --brand-navy-2: #1e306e;
+    --brand-gold: #dbae25;
+    --brand-sky: #d2edf8;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+    --primary: var(--brand-gold);
+    --on-primary: var(--brand-navy);
+    --ink: var(--brand-navy);
+    --ink-muted: #44476b;
+    --paper: #f6f8fc;
+    --surface: #ffffff;
+    --muted: var(--brand-sky);
+    --deep: var(--brand-navy);
+    --info: #2f6fdb;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --light-paper: #f6f8fc;
+    --light-muted: var(--brand-sky);
+    --light-ink: var(--brand-navy);
+    --light-ink-muted: #44476b;
+
+    --tint: color-mix(in srgb, var(--primary) 18%, var(--surface));
+    --shadow-color: var(--ink);
+    --shadow: var(--shadow-x) var(--shadow-y) 0 0 var(--shadow-color);
+    --shadow-lg: calc(var(--shadow-x) * 2) calc(var(--shadow-y) * 2) 0 0 var(--shadow-color);
+  }
+
+  html {
+    scroll-behavior: smooth;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  /* Dark navy sections (footer, CTA bands) in the brand navy. */
+  .on-deep {
+    --ink: #f6f8fc;
+    --ink-muted: #c3c9e3;
+    --surface: var(--brand-navy-2);
+    --paper: var(--brand-navy);
+    --muted: #2a3b7a;
+    --tint: color-mix(in srgb, var(--primary) 18%, var(--brand-navy-2));
+    --shadow-color: var(--primary);
+    --shadow: var(--shadow-x) var(--shadow-y) 0 0 var(--shadow-color);
+    --shadow-lg: calc(var(--shadow-x) * 2) calc(var(--shadow-y) * 2) 0 0 var(--shadow-color);
+  }
+
+  /* The logo's gold "CDM" vanishes on a gold background (the mobile menu
+     header), so give it a white chip there. */
+  .on-primary .cdm-logo {
+    box-sizing: content-box;
+    background: #fff;
+    border: 2px solid var(--ink);
+    border-radius: var(--radius);
+    padding: 4px 8px;
+  }
+
+  /* Soft sky panel used for alternating sections. */
+  .on-sky {
+    background: var(--brand-sky);
+  }
+
+  .section {
+    padding-block: 4rem;
+  }
+  @media (min-width: 48rem) {
+    .section {
+      padding-block: 6rem;
+    }
+  }
+
+  /* Small uppercase label above section headings. */
+  .eyebrow {
+    font-family: var(--font-body);
+    font-size: var(--text-label);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* Links inside long-form text (legal pages, case studies). */
+  .prose-cdm a {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-thickness: 2px;
+  }
+  .prose-cdm h2 {
+    font-size: var(--text-h3);
+    line-height: 1.2;
+    margin-top: 2.5rem;
+    margin-bottom: 0.75rem;
+  }
+  .prose-cdm p,
+  .prose-cdm ul {
+    margin-bottom: 1rem;
+  }
+  .prose-cdm ul {
+    list-style: square;
+    padding-left: 1.5rem;
+  }
+  .prose-cdm li {
+    margin-bottom: 0.35rem;
+  }
 }
