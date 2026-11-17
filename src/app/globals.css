@@ -111,4 +111,38 @@
   .prose-cdm li {
     margin-bottom: 0.35rem;
   }
+
+  /* ---- Motion additions on top of Cruise's site motion (A8): transform
+     (+ box-shadow) only, ease-out, never hides content; the theme's global
+     reduced-motion rule (animation: none !important) switches all of it off. */
+
+  /* Section headings rise into place once, when scrolled into view (Reveal). */
+  .reveal[data-revealed] { animation: cdm-reveal 300ms ease-out backwards; }
+  @keyframes cdm-reveal {
+    from { transform: translateY(16px); }
+    to   { transform: translateY(0); }
+  }
+
+  /* DropIn on a list whose items wrap a card (li > a.brutal): the item moves
+     and the card inside drops into its shadow, so the shadow keeps the card's
+     corners instead of appearing on the square <li>. */
+  [data-drop="run"] .drop-item:not(.brutal) { animation-name: cdm-drop-move; }
+  [data-drop="run"] .drop-item:not(.brutal) > .brutal {
+    animation: cdm-drop-shadow 200ms ease-out backwards;
+    animation-delay: calc(var(--drop-i, 0) * 60ms);
+  }
+  @keyframes cdm-drop-move {
+    from { transform: translate(-4px, -4px); }
+    to   { transform: translate(0, 0); }
+  }
+  @keyframes cdm-drop-shadow {
+    from { box-shadow: calc(var(--shadow-x) + 4px) calc(var(--shadow-y) + 4px) 0 0 var(--shadow-color); }
+    to   { box-shadow: var(--shadow); }
+  }
+
+  /* With animations off, the sweep bar would rest across the top of the
+     screen, so remove it entirely. */
+  @media (prefers-reduced-motion: reduce) {
+    .route-sweep { display: none; }
+  }
 }

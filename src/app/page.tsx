@@ -6,6 +6,8 @@ import { CruiseBadge } from "@/components/cruise/badge";
 import { cruiseButtonClasses } from "@/components/cruise/button";
 import { CruiseTestimonials } from "@/components/cruise/blocks/testimonials";
 import { HeroGlobe } from "@/components/site/hero-globe";
+import { DropIn } from "@/components/site/drop-in";
+import { StampHeadline } from "@/components/site/stamp-headline";
 import { ArrowLink, ConsultationBand, SectionHeading } from "@/components/site/sections";
 import { audienceIcons, IconChip, serviceIcons } from "@/components/site/icons";
 import { home, seo, testimonials } from "@/content/site";
@@ -27,7 +29,7 @@ export default function HomePage() {
             {hero.eyebrow}
           </CruiseBadge>
         }
-        headline={hero.headline}
+        headline={<StampHeadline text={hero.headline} />}
         lede={
           <>
             <p className="font-display text-h3 font-extrabold">{hero.strapline}</p>
@@ -84,7 +86,7 @@ export default function HomePage() {
       <section className="section on-sky border-y-(length:--border-w) border-ink" aria-labelledby="what-title">
         <div className="site-container flex flex-col gap-12">
           <SectionHeading eyebrow={whatWeDo.eyebrow} title={<span id="what-title">{whatWeDo.title}</span>} />
-          <ul className="grid gap-6 lg:grid-cols-3">
+          <DropIn className="grid gap-6 lg:grid-cols-3">
             {whatWeDo.capabilities.map((c, i) => (
               <li key={c.id} className="flex">
                 <Link
@@ -113,18 +115,18 @@ export default function HomePage() {
                   </div>
                   <span className="mt-auto inline-flex items-center gap-2 pt-2 font-display font-extrabold uppercase">
                     {c.title}
-                    <ArrowRight aria-hidden="true" className="size-5 transition-transform group-hover:translate-x-1" />
+                    <ArrowRight aria-hidden="true" className="size-5 transition-transform duration-120 ease-out group-hover:translate-x-1" />
                   </span>
                 </Link>
               </li>
             ))}
-          </ul>
+          </DropIn>
         </div>
       </section>
 
       {/* Our approach */}
       <section className="section" aria-labelledby="approach-title">
-        <div className="site-container grid gap-10 lg:grid-cols-[1fr_1.2fr] lg:items-start">
+        <DropIn as="div" className="site-container grid gap-10 lg:grid-cols-[1fr_1.2fr] lg:items-start">
           <div className="flex flex-col items-start gap-6">
             <SectionHeading eyebrow={approach.eyebrow} title={<span id="approach-title">{approach.title}</span>} />
             <Link href={approach.cta.href} className={cruiseButtonClasses({ variant: "primary" })}>
@@ -138,7 +140,7 @@ export default function HomePage() {
               </p>
             ))}
           </div>
-        </div>
+        </DropIn>
       </section>
 
       {/* Who we work with */}
@@ -153,7 +155,7 @@ export default function HomePage() {
               {whoWeWorkWith.linkLabel}
             </ArrowLink>
           </div>
-          <ul className="grid gap-6 md:grid-cols-3">
+          <DropIn className="grid gap-6 md:grid-cols-3">
             {whoWeWorkWith.audiences.map((a) => (
               <li key={a.id} className="flex">
                 <Link
@@ -165,12 +167,12 @@ export default function HomePage() {
                   <p className="text-ink-muted">{a.text}</p>
                   <ArrowRight
                     aria-hidden="true"
-                    className="mt-auto size-6 transition-transform group-hover:translate-x-1"
+                    className="mt-auto size-6 transition-transform duration-120 ease-out group-hover:translate-x-1"
                   />
                 </Link>
               </li>
             ))}
-          </ul>
+          </DropIn>
         </div>
       </section>
 
@@ -178,7 +180,7 @@ export default function HomePage() {
       <section className="section on-deep border-b-(length:--border-w) border-ink" aria-labelledby="why-title">
         <div className="site-container flex flex-col gap-12">
           <SectionHeading eyebrow={whyUs.eyebrow} title={<span id="why-title">{whyUs.title}</span>} />
-          <ul className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <DropIn className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {whyUs.points.map((w, i) => (
               <li key={w.title} className="brutal brutal-static flex gap-5 p-6">
                 <span className="on-primary grid size-12 shrink-0 place-items-center rounded-brutal border-2 border-ink font-display text-h3 font-extrabold">
@@ -190,7 +192,7 @@ export default function HomePage() {
                 </div>
               </li>
             ))}
-          </ul>
+          </DropIn>
         </div>
       </section>
 
@@ -203,7 +205,7 @@ export default function HomePage() {
               {process.link.label}
             </ArrowLink>
           </div>
-          <ol className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <DropIn as="ol" className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {process.steps.map((step, i) => (
               <li key={step.title} className="brutal brutal-static flex flex-col gap-3 p-6">
                 <span className="font-display text-h1 leading-none font-extrabold text-primary [-webkit-text-stroke:2px_var(--ink)]">
@@ -213,7 +215,7 @@ export default function HomePage() {
                 <p className="text-small text-ink-muted">{step.text}</p>
               </li>
             ))}
-          </ol>
+          </DropIn>
         </div>
       </section>
 
@@ -224,6 +226,7 @@ export default function HomePage() {
             title={home.testimonials.title}
             intro={home.testimonials.intro}
             items={testimonials.map((t, i) => ({ ...t, featured: i === 0 }))}
+            List={DropIn}
           />
         </div>
       </section>

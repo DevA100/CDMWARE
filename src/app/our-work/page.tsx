@@ -5,6 +5,7 @@ import { CruiseBadge } from "@/components/cruise/badge";
 import { cruiseButtonClasses } from "@/components/cruise/button";
 import { ConsultationBand, PageHeader, SectionHeading } from "@/components/site/sections";
 import { CaseVisual } from "@/components/site/case-visual";
+import { DropIn } from "@/components/site/drop-in";
 import { IconChip } from "@/components/site/icons";
 import { caseStudies, caseStudyCategories, ctas, ourWork, seo } from "@/content/site";
 import { pageMetadata } from "@/lib/metadata";
@@ -19,7 +20,7 @@ export default function OurWorkPage() {
       <section className="section" aria-labelledby="categories-title">
         <div className="site-container flex flex-col gap-8">
           <SectionHeading title={<span id="categories-title">{ourWork.categoriesTitle}</span>} />
-          <ul className="flex flex-wrap gap-3">
+          <DropIn className="flex flex-wrap gap-3">
             {caseStudyCategories.map((c) => (
               <li key={c}>
                 <CruiseBadge tone="muted" className="px-4 py-2 normal-case tracking-normal text-body font-bold">
@@ -27,7 +28,7 @@ export default function OurWorkPage() {
                 </CruiseBadge>
               </li>
             ))}
-          </ul>
+          </DropIn>
 
           {caseStudies.length > 0 ? (
             <ul className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">

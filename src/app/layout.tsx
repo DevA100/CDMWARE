@@ -3,6 +3,7 @@ import { Baloo_2, Bricolage_Grotesque } from "next/font/google";
 import { SiteHeader } from "@/components/site/site-header";
 import { SiteFooter } from "@/components/site/site-footer";
 import { FloatingActions } from "@/components/site/floating-actions";
+import { RouteSweep } from "@/components/site/route-sweep";
 import { seo, site } from "@/content/site";
 import { siteUrl } from "@/lib/metadata";
 import "./globals.css";
@@ -63,10 +64,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           Skip to content
         </a>
         <span id="top" tabIndex={-1} />
+        <RouteSweep />
         <SiteHeader />
-        <main id="main" className="flex-1">
-          {children}
-        </main>
+        {/* <main id="main"> is rendered by app/template.tsx (page-enter motion). */}
+        {children}
         <SiteFooter />
         <FloatingActions />
         <script

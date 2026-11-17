@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Check } from "lucide-react";
 import { ConsultationBand, PageHeader } from "@/components/site/sections";
+import { DropIn } from "@/components/site/drop-in";
 import { IconChip, serviceIcons } from "@/components/site/icons";
 import { seo, services, servicesPage } from "@/content/site";
 import { cx } from "@/lib/cruise-utils";
@@ -48,7 +49,7 @@ export default function ServicesPage() {
               <p className="max-w-(--measure) text-body text-ink-muted">{s.intro}</p>
             </div>
 
-            <div className="flex flex-col gap-6">
+            <DropIn as="div" className="flex flex-col gap-6">
               <div className="brutal brutal-static flex flex-col gap-4 p-6 md:p-8">
                 <h3 className="text-label uppercase">{servicesPage.listLabel}</h3>
                 <ul className="grid gap-3 sm:grid-cols-2">
@@ -64,7 +65,7 @@ export default function ServicesPage() {
                 <h3 className="text-label uppercase">{servicesPage.deliverablesLabel}</h3>
                 <p className="text-body">{s.deliverables}</p>
               </div>
-            </div>
+            </DropIn>
           </div>
         </section>
       ))}

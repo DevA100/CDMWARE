@@ -1,4 +1,4 @@
-import { useId, type ReactNode } from "react";
+import { useId, type ElementType, type ReactNode } from "react";
 import { cx } from "@/lib/cruise-utils";
 import { CruiseAvatar } from "../avatar";
 import { CruiseRating } from "../rating";
@@ -45,6 +45,7 @@ export function CruiseTestimonials({
   items = DEFAULT_ITEMS,
   variant = "grid",
   headingLevel = 2,
+  List = "ul",
   className,
 }: {
   title?: ReactNode;
@@ -52,6 +53,8 @@ export function CruiseTestimonials({
   items?: CruiseTestimonial[];
   variant?: "grid" | "single";
   headingLevel?: 2 | 3;
+  /** CDMware addition: the grid's list element, e.g. a DropIn wrapper. Default "ul". */
+  List?: ElementType<{ className?: string; children?: ReactNode }>;
   className?: string;
 }) {
   const titleId = useId();
@@ -74,7 +77,7 @@ export function CruiseTestimonials({
           </figure>
         ))
       ) : (
-        <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <List className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {shown.map((t) => (
             <li key={t.name} className="flex">
               <figure className={cx("brutal brutal-static flex w-full flex-col justify-between gap-6 p-6", t.featured && "on-primary")}>
@@ -94,7 +97,7 @@ export function CruiseTestimonials({
               </figure>
             </li>
           ))}
-        </ul>
+        </List>
       )}
     </section>
   );

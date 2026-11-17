@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { CruiseAlert } from "@/components/cruise/alert";
 import { ConsultationBand, PageHeader } from "@/components/site/sections";
+import { DropIn } from "@/components/site/drop-in";
 import { howWeWork, seo } from "@/content/site";
 import { pageMetadata } from "@/lib/metadata";
 
@@ -13,7 +14,7 @@ export default function HowWeWorkPage() {
 
       <section className="section" aria-label={howWeWork.eyebrow}>
         <div className="site-container flex flex-col gap-10">
-          <ol className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <DropIn as="ol" className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {howWeWork.steps.map((step, i) => (
               <li key={step.title} className="brutal brutal-static flex flex-col gap-3 p-6">
                 <span className="text-label uppercase text-ink-muted">
@@ -29,7 +30,7 @@ export default function HowWeWorkPage() {
                 <p className="text-ink-muted">{step.text}</p>
               </li>
             ))}
-          </ol>
+          </DropIn>
 
           <CruiseAlert tone="info" title={howWeWork.note.title} className="max-w-[52rem]">
             {howWeWork.note.text}

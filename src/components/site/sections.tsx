@@ -5,9 +5,10 @@ import { CruiseBreadcrumb, type CruiseCrumb } from "@/components/cruise/breadcru
 import { cruiseButtonClasses } from "@/components/cruise/button";
 import { cruiseWhatsAppLink } from "@/components/cruise/whatsapp-button";
 import { cx } from "@/lib/cruise-utils";
+import { Reveal } from "./reveal";
 import { closingCta, ctas, site } from "@/content/site";
 
-/** Eyebrow + heading + intro, used at the top of most sections. */
+/** Eyebrow + heading + intro, used at the top of most sections. Rises in once when scrolled into view. */
 export function SectionHeading({
   eyebrow,
   title,
@@ -24,7 +25,7 @@ export function SectionHeading({
   className?: string;
 }) {
   return (
-    <div
+    <Reveal
       className={cx(
         "flex max-w-[52rem] flex-col gap-3",
         align === "center" && "mx-auto items-center text-center",
@@ -34,7 +35,7 @@ export function SectionHeading({
       {eyebrow && <p className="eyebrow text-ink-muted">{eyebrow}</p>}
       <Tag className={Tag === "h1" ? "text-h1" : "text-h2"}>{title}</Tag>
       {intro && <p className="max-w-(--measure) text-body text-ink-muted">{intro}</p>}
-    </div>
+    </Reveal>
   );
 }
 

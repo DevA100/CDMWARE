@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Check } from "lucide-react";
 import { ConsultationBand, PageHeader } from "@/components/site/sections";
+import { DropIn } from "@/components/site/drop-in";
 import { audienceIcons, IconChip } from "@/components/site/icons";
 import { seo, whoWeServe } from "@/content/site";
 import { cx } from "@/lib/cruise-utils";
@@ -20,7 +21,7 @@ export default function WhoWeServePage() {
           aria-labelledby={`${a.id}-title`}
           className={cx("section scroll-mt-24", i % 2 === 1 && "on-sky border-y-(length:--border-w) border-ink")}
         >
-          <div className="site-container grid gap-10 lg:grid-cols-[1.2fr_1fr] lg:items-start">
+          <DropIn as="div" className="site-container grid gap-10 lg:grid-cols-[1.2fr_1fr] lg:items-start">
             <div className="flex flex-col gap-5">
               <IconChip icon={audienceIcons[a.id]} />
               <h2 id={`${a.id}-title`} className="text-h1">
@@ -40,7 +41,7 @@ export default function WhoWeServePage() {
                 ))}
               </ul>
             </div>
-          </div>
+          </DropIn>
         </section>
       ))}
 
