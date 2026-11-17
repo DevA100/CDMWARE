@@ -3,13 +3,15 @@
 import { useState, type FormEvent } from "react";
 import { Send } from "lucide-react";
 import { CruiseInput } from "@/components/cruise/input";
-import { CruiseSelect } from "@/components/cruise/select";
+import { CruiseCustomSelect } from "@/components/cruise/custom-select";
 import { CruiseTextarea } from "@/components/cruise/textarea";
 import { CruiseButton } from "@/components/cruise/button";
 import { CruiseAlert } from "@/components/cruise/alert";
 import { contact, site } from "@/content/site";
 
 type Errors = Partial<Record<"name" | "email" | "message", string>>;
+
+const serviceOptions = contact.form.serviceOptions.map((o) => ({ value: o, label: o }));
 
 /**
  * Contact form, submitted to Netlify Forms. Netlify detects the form from
@@ -19,6 +21,8 @@ type Errors = Partial<Record<"name" | "email" | "message", string>>;
 export function ContactForm() {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "failed">("idle");
   const [errors, setErrors] = useState<Errors>({});
+  // The custom select has no form field of its own; the hidden input below submits it.
+  const [service, setService] = useState<string | null>(null);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -43,6 +47,7 @@ export function ContactForm() {
       if (!res.ok) throw new Error(String(res.status));
       setStatus("sent");
       form.reset();
+      setService(null);
     } catch {
       setStatus("failed");
     }
@@ -72,16 +77,14 @@ export function ContactForm() {
         <CruiseInput label="Company (optional)" name="company" autoComplete="organization" />
       </div>
 
-      <CruiseSelect label={contact.form.serviceLabel} name="service" defaultValue="">
-        <option value="" disabled>
-          {contact.form.servicePlaceholder}
-        </option>
-        {contact.form.serviceOptions.map((o) => (
-          <option key={o} value={o}>
-            {o}
-          </option>
-        ))}
-      </CruiseSelect>
+      <CruiseCustomSelect
+        label={contact.form.serviceLabel}
+        placeholder={contact.form.servicePlaceholder}
+        options={serviceOptions}
+        value={service}
+        onValueChange={setService}
+      />
+      <input type="hidden" name="service" value={service ?? ""} />
 
       <CruiseTextarea
         label={contact.form.messageLabel}
