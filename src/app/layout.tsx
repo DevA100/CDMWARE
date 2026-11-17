@@ -54,7 +54,7 @@ const organizationLd = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${baloo.variable} ${bricolage.variable} antialiased`}>
+    <html lang="en" data-scroll-behavior="smooth" className={`${baloo.variable} ${bricolage.variable} antialiased`}>
       <body className="cruise flex min-h-screen flex-col" data-corners="soft">
         <a
           href="#main"
