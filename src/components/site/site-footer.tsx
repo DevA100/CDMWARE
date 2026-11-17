@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ArrowRight, Mail, MapPin, Phone } from "lucide-react";
 import { CruiseBrandIcon, CRUISE_BRAND_NAMES } from "@/components/cruise/blocks/brand-icons";
 import { CruiseWhatsAppButton } from "@/components/cruise/whatsapp-button";
-import { footer, site } from "@/content/site";
+import { footer, site, socialLinks } from "@/content/site";
 import { Logo } from "./logo";
 import { CurrentYear } from "./current-year";
 
@@ -19,19 +19,23 @@ export function SiteFooter() {
             <p className="font-display text-h3 font-extrabold">{footer.title}</p>
             <p className="eyebrow text-primary">{footer.descriptor}</p>
             <p className="max-w-[42ch] text-ink-muted">{footer.text}</p>
-            <ul className="flex flex-wrap gap-2" aria-label="Social links">
-              {site.socials.map((s) => (
-                <li key={s.network}>
-                  <a
-                    href={s.href}
-                    aria-label={`${site.name} on ${CRUISE_BRAND_NAMES[s.network]}`}
-                    className="brutal inline-flex size-11 items-center justify-center text-ink"
-                  >
-                    <CruiseBrandIcon brand={s.network} className="size-5" />
-                  </a>
-                </li>
-              ))}
-            </ul>
+            {socialLinks.length > 0 && (
+              <ul className="flex flex-wrap gap-2" aria-label="Social links">
+                {socialLinks.map((s) => (
+                  <li key={s.network}>
+                    <a
+                      href={s.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`${site.name} on ${CRUISE_BRAND_NAMES[s.network]}`}
+                      className="brutal inline-flex size-11 items-center justify-center text-ink"
+                    >
+                      <CruiseBrandIcon brand={s.network} className="size-5" />
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
 
           <nav aria-label={footer.quickLinksTitle} className="flex flex-col gap-3">

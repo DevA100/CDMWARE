@@ -25,14 +25,18 @@ export const site = {
   whatsapp: "2347043955397",
   whatsappMessage: "Hello CDMware, I'd like to talk about my business.",
   address: "Lekki, Lagos, Nigeria",
-  // TODO: replace "#" with the real profile URLs.
+  // TODO: replace "#" with the real profile URLs. Entries without a real
+  // URL are hidden (see `socialLinks` below).
   socials: [
     { network: "facebook", href: "#" },
     { network: "instagram", href: "#" },
-    { network: "linkedin", href: "#" },
+    { network: "linkedin", href: "https://www.linkedin.com/company/cdmware/" },
     { network: "x", href: "#" },
   ] as const,
 };
+
+/** The social profiles that have a real URL: shown in the footer and listed as `sameAs` in the structured data. */
+export const socialLinks = site.socials.filter((s) => /^https?:\/\//.test(s.href));
 
 /** Header navigation. "Home" only shows in the mobile menu (the logo links home on desktop). */
 export const nav: (Link & { mobileOnly?: boolean })[] = [

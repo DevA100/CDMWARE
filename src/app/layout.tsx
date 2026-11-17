@@ -4,7 +4,7 @@ import { SiteHeader } from "@/components/site/site-header";
 import { SiteFooter } from "@/components/site/site-footer";
 import { FloatingActions } from "@/components/site/floating-actions";
 import { RouteSweep } from "@/components/site/route-sweep";
-import { seo, site } from "@/content/site";
+import { seo, site, socialLinks } from "@/content/site";
 import { siteUrl } from "@/lib/metadata";
 import "./globals.css";
 
@@ -46,6 +46,7 @@ const organizationLd = {
   logo: `${site.url}/brand/logo.png`,
   email: site.email,
   telephone: site.phone,
+  sameAs: socialLinks.map((s) => s.href),
   address: {
     "@type": "PostalAddress",
     addressLocality: "Lekki, Lagos",

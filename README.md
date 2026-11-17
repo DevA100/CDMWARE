@@ -65,7 +65,7 @@ Add an object to `caseStudies` in `src/content/site.ts`. The `CaseStudy` type li
 
 Search the code for `TODO`. In short:
 
-1. **Social links** (`site.socials`) — all `#` for now.
+1. **Social links** (`site.socials`) — LinkedIn is live; Facebook, Instagram and X are still `#`. Entries without a real URL are hidden automatically, so just add the URL to show one.
 2. **Case studies** — `caseStudies` is empty, so `/our-work` shows a "being prepared" message.
 3. **Insights articles** — the six article titles show as "Coming soon"; there are no article pages yet.
 
