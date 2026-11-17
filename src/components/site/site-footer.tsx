@@ -89,9 +89,19 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <div className="flex flex-col gap-4 border-t-2 border-ink pt-6 text-small text-ink-muted md:flex-row md:items-center md:justify-between">
-          <p>
-            {footer.copyright.before} <CurrentYear /> {footer.copyright.after}
+        {/* pr-20 / md:pr-16 keep this row clear of the fixed WhatsApp and back-to-top buttons when scrolled to the bottom. */}
+        <div className="flex flex-col gap-4 border-t-2 border-ink pt-6 pr-20 text-small text-ink-muted md:flex-row md:items-center md:justify-between md:pr-16">
+          {/* Copyright and registration: one line from md, stacked on mobile. */}
+          <p className="flex flex-col gap-1 md:flex-row md:items-center md:gap-0">
+            <span>
+              {footer.copyright.before} <CurrentYear /> {footer.copyright.after}
+            </span>
+            <span>
+              <span aria-hidden="true" className="mx-2 hidden md:inline">
+                ·
+              </span>
+              {footer.registrationLabel} {site.registrationNumber}
+            </span>
           </p>
           <ul className="flex gap-6">
             {footer.legal.map((l) => (

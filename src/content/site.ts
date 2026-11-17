@@ -11,6 +11,7 @@ type Link = { label: string; href: string };
 export const site = {
   name: "CDMware",
   legalName: "CDMware",
+  registrationNumber: "8695337",
   tagline: "Engineering Your Vision.",
   positioning: "An Innovation and Technology Company",
   descriptors: "Business Innovation. Digital Innovation. AI-Powered Engineering.",
@@ -683,6 +684,8 @@ export const footer = {
   ] satisfies Link[],
   /** Rendered as "Copyright © <current year> CDMware. All Rights Reserved." */
   copyright: { before: "Copyright ©", after: `${site.name}. All Rights Reserved.` },
+  /** Shown after the copyright line: "Company Registration No. <site.registrationNumber>". */
+  registrationLabel: "Company Registration No.",
 };
 
 /* ------------------------------------------------------------------ */
