@@ -1,16 +1,17 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import { ArrowRight, Check } from "lucide-react";
 import { ConsultationBand, PageHeader, SectionHeading } from "@/components/site/sections";
 import { IconChip, serviceIcons } from "@/components/site/icons";
 import { process, services } from "@/content/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Services",
   description:
     "AI-powered software and web development, creative design, digital marketing and IT consulting from CDMWare in Lagos, Nigeria.",
-  alternates: { canonical: "/services" },
-};
+  path: "/services",
+});
 
 export default function ServicesPage() {
   return (

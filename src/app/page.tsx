@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Check, Sparkles } from "lucide-react";
 import { CruiseHero } from "@/components/cruise/hero";
@@ -16,11 +17,19 @@ import {
   industries,
   process,
   services,
+  site,
   stats,
   techStack,
   testimonials,
   whyUs,
 } from "@/content/site";
+import { homeTitle, pageMetadata } from "@/lib/metadata";
+
+export const metadata: Metadata = pageMetadata({
+  title: homeTitle,
+  description: site.description,
+  path: "/",
+});
 
 export default function HomePage() {
   return (

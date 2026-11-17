@@ -6,7 +6,7 @@
 - Contact form: Netlify Forms (detection file `public/__forms.html`; enable form detection in Netlify after first deploy).
 
 ## Brand
-- Logo kept from the old site (cropped, transparent): `public/brand/logo.png`, `logo-light.png` (white "WARE" for navy), `logo-full*.png` (with tagline), `og-image.png`. Favicon from the old "C" app icon.
+- Logo kept from the old site (cropped, transparent): `public/brand/logo.png`, `logo-light.png` (white "WARE" for navy), `logo-full*.png` (with tagline). Link-preview images are generated per page by `opengraph-image.tsx` files (shared design in `src/lib/og.tsx`). Favicon from the old "C" app icon.
 - Colours: Navy `#0F0F47` (ink, dark sections), Gold `#DBAE25` (primary), Sky `#D2EDF8` (soft panels). Overrides live in `src/app/globals.css`.
 - Fonts: Cruise UI defaults (Baloo 2 + Bricolage Grotesque). Old site used Figtree.
 - Corners: `data-corners="soft"` on body.

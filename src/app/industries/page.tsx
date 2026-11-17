@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import { ConsultationBand, PageHeader, SectionHeading } from "@/components/site/sections";
 import { IconChip, industryIcons } from "@/components/site/icons";
 import { about, industries } from "@/content/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Industries",
   description:
     "Digital solutions for startups, SMEs, corporates, NGOs, education, healthcare and government, from CDMWare.",
-  alternates: { canonical: "/industries" },
-};
+  path: "/industries",
+});
 
 export default function IndustriesPage() {
   return (

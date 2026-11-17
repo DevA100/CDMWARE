@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { CruiseBadge } from "@/components/cruise/badge";
@@ -6,11 +7,12 @@ import { ConsultationBand, PageHeader } from "@/components/site/sections";
 import { CaseVisual } from "@/components/site/case-visual";
 import { caseStudies } from "@/content/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Case Studies",
-  description: "Selected software, design and digital marketing projects delivered by CDMWare.",
-  alternates: { canonical: "/case-studies" },
-};
+  description:
+    "Selected software, design and digital marketing projects delivered by CDMWare.",
+  path: "/case-studies",
+});
 
 export default function CaseStudiesPage() {
   return (

@@ -1,16 +1,17 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { CruiseWhatsAppButton } from "@/components/cruise/whatsapp-button";
 import { ContactForm } from "@/components/site/contact-form";
 import { PageHeader } from "@/components/site/sections";
 import { consultation, site } from "@/content/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Contact Us",
   description:
     "Start a project or book a free 30-minute consultation with CDMWare. Lekki, Lagos, Nigeria.",
-  alternates: { canonical: "/contact" },
-};
+  path: "/contact",
+});
 
 export default function ContactPage() {
   return (

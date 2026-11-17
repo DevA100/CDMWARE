@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CruiseBadge } from "@/components/cruise/badge";
@@ -14,11 +15,11 @@ export async function generateMetadata({ params }: PageProps<"/case-studies/[slu
   const { slug } = await params;
   const study = caseStudies.find((c) => c.slug === slug);
   if (!study) return {};
-  return {
+  return pageMetadata({
     title: study.title,
     description: study.summary,
-    alternates: { canonical: `/case-studies/${study.slug}` },
-  };
+    path: `/case-studies/${study.slug}`,
+  });
 }
 
 export default async function CaseStudyPage({ params }: PageProps<"/case-studies/[slug]">) {

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import { Eye, Target } from "lucide-react";
 import { CruiseBadge } from "@/components/cruise/badge";
 import { CruiseStatBar } from "@/components/cruise/stat-bar";
@@ -6,12 +7,12 @@ import { ConsultationBand, PageHeader, SectionHeading } from "@/components/site/
 import { IconChip } from "@/components/site/icons";
 import { about, process, stats, techStack, whyUs } from "@/content/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "About Us",
   description:
     "CDMWare is a Lagos-based digital solutions company building software, creative design and digital marketing for startups, SMEs and organisations.",
-  alternates: { canonical: "/about" },
-};
+  path: "/about",
+});
 
 export default function AboutPage() {
   return (
