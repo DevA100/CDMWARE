@@ -1,31 +1,16 @@
-import {
-  Building2,
-  Code2,
-  GraduationCap,
-  HeartHandshake,
-  HeartPulse,
-  Landmark,
-  Lightbulb,
-  Megaphone,
-  Palette,
-  Rocket,
-  type LucideIcon,
-} from "lucide-react";
+import { Building2, BrainCircuit, Lightbulb, Rocket, Store, Workflow, type LucideIcon } from "lucide-react";
+import type { AudienceId, ServiceId } from "@/content/site";
 
-export const serviceIcons: Record<string, LucideIcon> = {
-  "software-web-development": Code2,
-  "creative-design": Palette,
-  "digital-marketing": Megaphone,
-  "it-consulting": Lightbulb,
+export const serviceIcons: Record<ServiceId, LucideIcon> = {
+  "business-innovation": Lightbulb,
+  "digital-innovation": Workflow,
+  "ai-powered-engineering": BrainCircuit,
 };
 
-export const industryIcons: Record<string, LucideIcon> = {
-  "startups-smes": Rocket,
-  corporate: Building2,
-  ngos: HeartHandshake,
-  education: GraduationCap,
-  healthcare: HeartPulse,
-  government: Landmark,
+export const audienceIcons: Record<AudienceId, LucideIcon> = {
+  "startups-founders": Rocket,
+  smes: Store,
+  "organizations-institutions": Building2,
 };
 
 /** A square gold chip holding an icon. */

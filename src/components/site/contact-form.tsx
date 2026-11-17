@@ -7,7 +7,7 @@ import { CruiseSelect } from "@/components/cruise/select";
 import { CruiseTextarea } from "@/components/cruise/textarea";
 import { CruiseButton } from "@/components/cruise/button";
 import { CruiseAlert } from "@/components/cruise/alert";
-import { services, site } from "@/content/site";
+import { contact, site } from "@/content/site";
 
 type Errors = Partial<Record<"name" | "email" | "message", string>>;
 
@@ -29,7 +29,7 @@ export function ContactForm() {
     if (!String(data.get("name") ?? "").trim()) next.name = "Enter your name.";
     const email = String(data.get("email") ?? "").trim();
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) next.email = "Enter an email address like name@company.com.";
-    if (String(data.get("message") ?? "").trim().length < 10) next.message = "Tell us a little about your project.";
+    if (String(data.get("message") ?? "").trim().length < 10) next.message = "Tell us a little about your business.";
     setErrors(next);
     if (Object.keys(next).length > 0) return;
 
@@ -72,27 +72,24 @@ export function ContactForm() {
         <CruiseInput label="Company (optional)" name="company" autoComplete="organization" />
       </div>
 
-      <CruiseSelect label="What do you need help with?" name="service" defaultValue="">
+      <CruiseSelect label={contact.form.serviceLabel} name="service" defaultValue="">
         <option value="" disabled>
-          Choose a service
+          {contact.form.servicePlaceholder}
         </option>
-        {services.map((s) => (
-          <option key={s.slug} value={s.title}>
-            {s.title}
+        {contact.form.serviceOptions.map((o) => (
+          <option key={o} value={o}>
+            {o}
           </option>
         ))}
-        <option value="Free consultation">Free 30-minute consultation</option>
-        <option value="Other">Something else</option>
       </CruiseSelect>
 
       <CruiseTextarea
-        label="Tell us about your project"
+        label={contact.form.messageLabel}
         name="message"
         rows={5}
         autoGrow
         required
         error={errors.message}
-        hint="Goals, timeline, budget range — whatever helps us understand."
       />
 
       {status === "failed" && (
@@ -102,7 +99,7 @@ export function ContactForm() {
       )}
 
       <CruiseButton type="submit" disabled={status === "sending"} className="self-start">
-        <Send aria-hidden="true" /> {status === "sending" ? "Sending…" : "Send message"}
+        <Send aria-hidden="true" /> {status === "sending" ? "Sending…" : contact.form.submit}
       </CruiseButton>
     </form>
   );

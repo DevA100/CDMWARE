@@ -3,8 +3,8 @@ import { Baloo_2, Bricolage_Grotesque } from "next/font/google";
 import { SiteHeader } from "@/components/site/site-header";
 import { SiteFooter } from "@/components/site/site-footer";
 import { FloatingActions } from "@/components/site/floating-actions";
-import { site } from "@/content/site";
-import { homeTitle, siteUrl } from "@/lib/metadata";
+import { seo, site } from "@/content/site";
+import { siteUrl } from "@/lib/metadata";
 import "./globals.css";
 
 const baloo = Baloo_2({
@@ -21,7 +21,7 @@ const bricolage = Bricolage_Grotesque({
 export const metadata: Metadata = {
   metadataBase: siteUrl(),
   title: {
-    default: homeTitle,
+    default: seo.home.title,
     template: `%s | ${site.name}`,
   },
   description: site.description,
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     type: "website",
     siteName: site.name,
     locale: "en_NG",
-    title: homeTitle,
+    title: seo.home.title,
     description: site.description,
   },
   twitter: { card: "summary_large_image" },
@@ -40,12 +40,13 @@ const organizationLd = {
   "@type": "Organization",
   name: site.name,
   url: site.url,
+  slogan: site.tagline,
+  description: site.description,
   logo: `${site.url}/brand/logo.png`,
   email: site.email,
   telephone: site.phone,
   address: {
     "@type": "PostalAddress",
-    streetAddress: "18 Kessington Oribhabor Street",
     addressLocality: "Lekki, Lagos",
     addressCountry: "NG",
   },

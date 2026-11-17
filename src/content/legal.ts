@@ -5,13 +5,13 @@ export type LegalSection = { title: string; paragraphs?: string[]; list?: string
 export const terms = {
   updated: "22 January 2026",
   intro: [
-    "Welcome to CDMW (CDMWare). By accessing or using our website, services, or engaging with us for digital solutions, you agree to be bound by these Terms and Conditions. Please read them carefully.",
+    "Welcome to CDMware. By accessing or using our website, services, or engaging with us for digital solutions, you agree to be bound by these Terms and Conditions. Please read them carefully.",
   ],
   sections: [
     {
       title: "1. Definitions",
       list: [
-        "“Company,” “we,” “our,” or “us” refers to CDMW / CDMWare.",
+        "“Company,” “we,” “our,” or “us” refers to CDMware.",
         "“Client,” “you,” or “your” refers to any individual, business, or organisation using our website or services.",
         "“Services” include software development, web and mobile app development, UI/UX design, creative services, digital marketing, IT consulting, and related offerings.",
       ],
@@ -36,7 +36,7 @@ export const terms = {
     {
       title: "4. Services Engagement",
       list: [
-        "All services provided by CDMW are subject to specific project agreements, proposals, or contracts.",
+        "All services provided by CDMware are subject to specific project agreements, proposals, or contracts.",
         "Project scope, timelines, deliverables, and pricing will be clearly defined before commencement.",
         "Any additional work outside the agreed scope may require a separate agreement or additional fees.",
       ],
@@ -52,7 +52,7 @@ export const terms = {
     {
       title: "6. Intellectual Property",
       list: [
-        "All original designs, software, content, code, and materials created by CDMW remain our intellectual property until full payment is received, unless otherwise agreed.",
+        "All original designs, software, content, code, and materials created by CDMware remain our intellectual property until full payment is received, unless otherwise agreed.",
         "Upon full payment, ownership or usage rights will be transferred as defined in the project agreement.",
         "You may not reproduce, resell, or distribute our materials without written consent.",
       ],
@@ -77,7 +77,7 @@ export const terms = {
       title: "9. Limitation of Liability",
       paragraphs: ["To the maximum extent permitted by law:"],
       list: [
-        "CDMW shall not be liable for indirect, incidental, or consequential damages.",
+        "CDMware shall not be liable for indirect, incidental, or consequential damages.",
         "We do not guarantee uninterrupted or error-free operation of websites or software due to third-party services, hosting providers, or external factors.",
       ],
     },
@@ -103,7 +103,7 @@ export const terms = {
     {
       title: "13. Governing Law",
       paragraphs: [
-        "These Terms shall be governed and interpreted in accordance with the laws of the applicable jurisdiction where CDMW operates, without regard to conflict of law principles.",
+        "These Terms shall be governed and interpreted in accordance with the laws of the applicable jurisdiction where CDMware operates, without regard to conflict of law principles.",
       ],
     },
     {
@@ -118,7 +118,7 @@ export const terms = {
 export const privacy = {
   updated: "22 January 2026",
   intro: [
-    "CDMWare (“we”, “our”, “us”) is committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy explains how we collect, use, disclose, and safeguard information when you visit our website, use our services, or interact with us in any way.",
+    "CDMware (“we”, “our”, “us”) is committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy explains how we collect, use, disclose, and safeguard information when you visit our website, use our services, or interact with us in any way.",
     "By accessing our website or using our services, you agree to the terms of this Privacy Policy.",
   ],
   sections: [

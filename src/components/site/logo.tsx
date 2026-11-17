@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { site } from "@/content/site";
 
-/** The CDMWare wordmark. `tone="light"` is for navy backgrounds. */
+/** The CDMware wordmark. `tone="light"` is for navy backgrounds. */
 export function Logo({ tone = "dark", className }: { tone?: "dark" | "light"; className?: string }) {
   return (
     <Image

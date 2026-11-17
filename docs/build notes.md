@@ -1,4 +1,4 @@
-# CDMWare website rebuild — build notes (2026-11-17)
+# CDMware website rebuild — build notes (2026-11-17)
 
 ## Stack
 - Next.js 16 (App Router, Cache Components on), Tailwind CSS v4, Cruise UI (shadcn registry `@cruiseui`, components in `src/components/cruise/`)
@@ -11,17 +11,18 @@
 - Fonts: Cruise UI defaults (Baloo 2 + Bricolage Grotesque). Old site used Figtree.
 - Corners: `data-corners="soft"` on body.
 
-## Pages
+## Content rebuild (later on 2026-11-17)
+The site was rebuilt around the new positioning in `docs/website-content.md`. Pages are now `/`, `/about`, `/services`, `/who-we-serve`, `/how-we-work`, `/our-work` (+ `/our-work/[slug]` template), `/insights`, `/contact`, `/terms-of-services`, `/privacy-policy`. The old `/industries`, `/case-studies/*` and `/services/[slug]` routes were removed and 301-redirected in `netlify.toml`. Stats, the tech stack and the placeholder case studies were dropped. The rest of these notes describe the first build.
+
+## Pages (first build)
 `/`, `/services` + 4 service pages, `/case-studies` + 3 case study pages, `/industries`, `/about`, `/contact`, `/terms-of-services`, `/privacy-policy` (same URLs as old site), 404, sitemap.xml, robots.txt.
 
 ## Content
 All copy in `src/content/site.ts`; legal text in `src/content/legal.ts`. Search for `TODO` to find placeholders.
 
 ## Open items before launch
-- Stats (50+ clients, 100+ projects, 5+ awards, 24/7) are placeholders
-- Case studies: client names, challenge, approach, results are placeholders; UI/UX case study needs a real image (old one was a stock template)
 - Social links all `#` — user will send real accounts
-- Phone number conflict on old site: +234 704 395 5397 (footer/WhatsApp, used now) vs +234 815 171 4278 (policy pages)
+- No case studies or Insights articles published yet (see README)
 - Testimonial photos from old site not used (initials avatars instead)
 
 ## Workflow

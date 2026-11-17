@@ -1,32 +1,24 @@
 import Link from "next/link";
-import { Mail, MapPin, Phone } from "lucide-react";
+import { ArrowRight, Mail, MapPin, Phone } from "lucide-react";
 import { CruiseBrandIcon, CRUISE_BRAND_NAMES } from "@/components/cruise/blocks/brand-icons";
 import { CruiseWhatsAppButton } from "@/components/cruise/whatsapp-button";
-import { about, services, site } from "@/content/site";
+import { footer, site } from "@/content/site";
 import { Logo } from "./logo";
 import { CurrentYear } from "./current-year";
 
-const company = [
-  { label: "About us", href: "/about" },
-  { label: "Case studies", href: "/case-studies" },
-  { label: "Industries", href: "/industries" },
-  { label: "Contact", href: "/contact" },
-];
-
-const legal = [
-  { label: "Terms of Services", href: "/terms-of-services" },
-  { label: "Privacy Policy", href: "/privacy-policy" },
-];
+const linkClass = "inline-flex min-h-10 items-center underline-offset-4 hover:underline";
 
 export function SiteFooter() {
   return (
     <footer className="on-deep border-t-(length:--border-w) border-ink">
       <div className="signature-band on-primary" aria-hidden="true" />
       <div className="site-container flex flex-col gap-12 py-14">
-        <div className="grid gap-12 lg:grid-cols-[1.3fr_1fr_1fr_1.3fr]">
-          <div className="flex flex-col gap-5">
+        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1.3fr]">
+          <div className="flex flex-col gap-4">
             <Logo tone="light" className="h-10 w-auto self-start" />
-            <p className="max-w-[42ch] text-ink-muted">{about.body.split(". ")[0]}.</p>
+            <p className="font-display text-h3 font-extrabold">{footer.title}</p>
+            <p className="eyebrow text-primary">{footer.descriptor}</p>
+            <p className="max-w-[42ch] text-ink-muted">{footer.text}</p>
             <ul className="flex flex-wrap gap-2" aria-label="Social links">
               {site.socials.map((s) => (
                 <li key={s.network}>
@@ -42,25 +34,12 @@ export function SiteFooter() {
             </ul>
           </div>
 
-          <nav aria-label="Services" className="flex flex-col gap-3">
-            <h2 className="text-label uppercase text-primary">Services</h2>
+          <nav aria-label={footer.quickLinksTitle} className="flex flex-col gap-3">
+            <h2 className="text-label uppercase text-primary">{footer.quickLinksTitle}</h2>
             <ul className="flex flex-col">
-              {services.map((s) => (
-                <li key={s.slug}>
-                  <Link href={`/services/${s.slug}`} className="inline-flex min-h-10 items-center underline-offset-4 hover:underline">
-                    {s.short}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
-
-          <nav aria-label="Company" className="flex flex-col gap-3">
-            <h2 className="text-label uppercase text-primary">Company</h2>
-            <ul className="flex flex-col">
-              {company.map((l) => (
+              {footer.quickLinks.map((l) => (
                 <li key={l.href}>
-                  <Link href={l.href} className="inline-flex min-h-10 items-center underline-offset-4 hover:underline">
+                  <Link href={l.href} className={linkClass}>
                     {l.label}
                   </Link>
                 </li>
@@ -68,12 +47,32 @@ export function SiteFooter() {
             </ul>
           </nav>
 
+          <nav aria-label={footer.servicesTitle} className="flex flex-col gap-3">
+            <h2 className="text-label uppercase text-primary">{footer.servicesTitle}</h2>
+            <ul className="flex flex-col">
+              {footer.services.map((l) => (
+                <li key={l.href}>
+                  <Link href={l.href} className={linkClass}>
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
+              <li className="mt-2">
+                <Link href={footer.howWeWork.href} className={`${linkClass} gap-2 font-bold`}>
+                  {footer.howWeWork.label} <ArrowRight aria-hidden="true" className="size-4 text-primary" />
+                </Link>
+              </li>
+            </ul>
+          </nav>
+
           <div className="flex flex-col gap-3">
-            <h2 className="text-label uppercase text-primary">Contact us</h2>
+            <h2 className="text-label uppercase text-primary">{footer.contactTitle}</h2>
             <ul className="flex flex-col gap-3">
               <li className="flex gap-3">
-                <MapPin aria-hidden="true" className="mt-0.5 size-5 shrink-0 text-primary" />
-                <span>{site.address}</span>
+                <Mail aria-hidden="true" className="mt-0.5 size-5 shrink-0 text-primary" />
+                <a href={`mailto:${site.email}`} className="underline-offset-4 hover:underline">
+                  {site.email}
+                </a>
               </li>
               <li className="flex gap-3">
                 <Phone aria-hidden="true" className="mt-0.5 size-5 shrink-0 text-primary" />
@@ -82,10 +81,8 @@ export function SiteFooter() {
                 </a>
               </li>
               <li className="flex gap-3">
-                <Mail aria-hidden="true" className="mt-0.5 size-5 shrink-0 text-primary" />
-                <a href={`mailto:${site.email}`} className="underline-offset-4 hover:underline">
-                  {site.email}
-                </a>
+                <MapPin aria-hidden="true" className="mt-0.5 size-5 shrink-0 text-primary" />
+                <span>{site.address}</span>
               </li>
             </ul>
             <CruiseWhatsAppButton phone={site.whatsapp} message={site.whatsappMessage} className="mt-2 self-start" />
@@ -94,10 +91,10 @@ export function SiteFooter() {
 
         <div className="flex flex-col gap-4 border-t-2 border-ink pt-6 text-small text-ink-muted md:flex-row md:items-center md:justify-between">
           <p>
-            © <CurrentYear /> {site.legalName}. All rights reserved.
+            {footer.copyright.before} <CurrentYear /> {footer.copyright.after}
           </p>
           <ul className="flex gap-6">
-            {legal.map((l) => (
+            {footer.legal.map((l) => (
               <li key={l.href}>
                 <Link href={l.href} className="underline-offset-4 hover:underline">
                   {l.label}

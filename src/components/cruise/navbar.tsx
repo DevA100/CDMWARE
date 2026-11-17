@@ -11,6 +11,8 @@ export type CruiseNavLink = {
   active?: boolean;
   /** A short tag after the label, e.g. "New" (a Badge; keep it to one link). */
   badge?: string;
+  /** Only in the mobile Menu drawer, e.g. "Home" when the logo already links home. */
+  mobileOnly?: boolean;
 };
 
 type NavbarProps = {
@@ -58,7 +60,7 @@ export function CruiseNavbar({
         </Link>
         {links.length > 0 && (
           <ul className={cx("hidden items-center gap-6", bp.flex)}>
-            {links.map((link) => (
+            {links.filter((link) => !link.mobileOnly).map((link) => (
               <li key={`${link.label}|${link.href}`}>
                 <Link
                   href={link.href}

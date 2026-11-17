@@ -1,4 +1,4 @@
-# CDMWare website
+# CDMware website
 
 The new cdmware.com, built with **Next.js 16**, **Tailwind CSS v4** and **[Cruise UI](https://cruiseui.dev)**, deployed on **Netlify**.
 
@@ -20,15 +20,20 @@ npm run lint
 
 | What | Where |
 | --- | --- |
-| **All site text, services, case studies, stats, contact details, social links** | `src/content/site.ts` |
+| **All page copy, navigation, footer, SEO titles/descriptions, contact details, social links** | `src/content/site.ts` |
+| **Case studies** (add an entry to `caseStudies` to publish one) | `src/content/site.ts` |
+| Source copy and brand guidelines from the CDMware team | `docs/website-content.md` |
 | Terms & Privacy text | `src/content/legal.ts` |
 | Pages | `src/app/**/page.tsx` |
-| Site components (header, footer, sections) | `src/components/site/` |
+| Page metadata helper (title, Open Graph, Twitter) | `src/lib/metadata.ts` |
+| Link-preview images (one `opengraph-image.tsx` per route, shared design) | `src/lib/og.tsx` |
+| Site components (header, footer, page header, closing CTA, icons) | `src/components/site/` |
 | Cruise UI components (installed from the registry) | `src/components/cruise/` |
 | Cruise UI theme | `src/app/cruise-ui.css` (don't edit; re-install to update) |
-| **CDMWare brand colours** (overrides on top of Cruise) | `src/app/globals.css` |
-| Logos, OG image | `public/brand/` |
+| **CDMware brand colours** (overrides on top of Cruise) | `src/app/globals.css` |
+| Logos | `public/brand/` |
 | Favicon / app icons | `src/app/icon.png`, `src/app/apple-icon.png`, `src/app/favicon.ico` |
+| Redirects from old URLs | `netlify.toml` |
 
 ### Brand colours
 
@@ -41,21 +46,28 @@ npm run lint
 ## Pages
 
 - `/` Home
-- `/services` and `/services/[slug]` (4 service pages)
-- `/case-studies` and `/case-studies/[slug]` (3 case studies)
-- `/industries`
 - `/about`
+- `/services` (Business Innovation, Digital Innovation and AI-Powered Engineering as sections: `#business-innovation`, `#digital-innovation`, `#ai-powered-engineering`)
+- `/who-we-serve` (Startups & Founders, SMEs, Organizations & Institutions)
+- `/how-we-work`
+- `/our-work` and `/our-work/[slug]` (case studies; none published yet)
+- `/insights` (categories and upcoming article titles; no articles yet)
 - `/contact` (Netlify Forms)
 - `/terms-of-services`, `/privacy-policy` (same URLs as the old site)
+
+Old URLs (`/industries`, `/case-studies/*`, the four `/services/<slug>` pages) are 301-redirected in `netlify.toml`.
+
+### Adding a case study
+
+Add an object to `caseStudies` in `src/content/site.ts`. The `CaseStudy` type lists the fields: context, challenge, assessment, approach, an optional solution, and outcome, plus `slug`, `title`, `category`, `summary` and `image`. Put the image in `public/images/`, or leave `image` empty for a branded placeholder. The card on `/our-work`, the page at `/our-work/<slug>`, its link-preview image and the sitemap entry are all generated from that entry. Only publish projects with accurate descriptions and the client's permission (or an approved anonymized version).
 
 ## Placeholders to replace before launch
 
 Search the code for `TODO`. In short:
 
-1. **Stats** (`stats` in `src/content/site.ts`) — figures are placeholders.
-2. **Case studies** — client names, challenge, approach and results are placeholders. The UI/UX case study also needs a real image (put it in `public/images/` and set `image`).
-3. **Social links** (`site.socials`) — all `#` for now.
-4. **Phone number** — the old site listed two numbers (+234 704 395 5397 and +234 815 171 4278). The site currently uses the first.
+1. **Social links** (`site.socials`) — all `#` for now.
+2. **Case studies** — `caseStudies` is empty, so `/our-work` shows a "being prepared" message.
+3. **Insights articles** — the six article titles show as "Coming soon"; there are no article pages yet.
 
 ## Contact form (Netlify Forms)
 

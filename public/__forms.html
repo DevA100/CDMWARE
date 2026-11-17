@@ -8,8 +8,9 @@
   <body>
     <!--
       Netlify Forms detection file. Netlify scans this static page at deploy
-      time to register the "contact" form. Keep the field names in sync with
-      src/components/site/contact-form.tsx.
+      time to register the "contact" form. Keep the field names and service options in sync with
+      src/components/site/contact-form.tsx
+      (options come from contact.form.serviceOptions in src/content/site.ts).
     -->
     <form name="contact" data-netlify="true" netlify-honeypot="bot-field" hidden>
       <input type="hidden" name="form-name" value="contact" />
@@ -18,7 +19,14 @@
       <input name="email" type="email" />
       <input name="phone" />
       <input name="company" />
-      <select name="service"><option value="">-</option></select>
+      <select name="service">
+        <option value="">-</option>
+        <option value="Business Innovation">Business Innovation</option>
+        <option value="Digital Innovation">Digital Innovation</option>
+        <option value="AI-Powered Engineering">AI-Powered Engineering</option>
+        <option value="Initial consultation">Initial consultation</option>
+        <option value="Something else">Something else</option>
+      </select>
       <textarea name="message"></textarea>
     </form>
   </body>

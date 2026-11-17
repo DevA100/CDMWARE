@@ -1,25 +1,29 @@
 /**
- * All site copy and settings live here, so the team can update text,
- * numbers and links without touching page layouts.
+ * All site copy and settings live here, so the team can update text and
+ * links without touching page layouts. The copy comes from
+ * docs/website-content.md.
  *
  * Search for "TODO" to find every placeholder that still needs real content.
  */
 
+type Link = { label: string; href: string };
+
 export const site = {
-  name: "CDMWare",
-  legalName: "CDMWARE",
-  tagline: "Your Vision. Engineered.",
+  name: "CDMware",
+  legalName: "CDMware",
+  tagline: "Engineering Your Vision.",
+  positioning: "An Innovation and Technology Company",
+  descriptors: "Business Innovation. Digital Innovation. AI-Powered Engineering.",
   url: "https://cdmware.com",
+  // Also the home page meta description.
   description:
-    "CDMWare designs and delivers AI-driven software, creative design and digital marketing that solve real business problems for startups, SMEs and organisations.",
+    "CDMware helps startups, SMEs and organizations refine business models, develop digital strategies and build AI-powered solutions. Engineering Your Vision.",
   email: "info@cdmware.com",
-  // Footer + WhatsApp number on the current site. The policy pages on the old
-  // site listed +234 815 171 4278 instead. TODO: confirm which one to use.
   phone: "+234 704 395 5397",
   phoneHref: "tel:+2347043955397",
   whatsapp: "2347043955397",
-  whatsappMessage: "Hello CDMWare, I'd like to talk about a project.",
-  address: "18 Kessington Oribhabor Street, Lekki, Lagos, Nigeria",
+  whatsappMessage: "Hello CDMware, I'd like to talk about my business.",
+  address: "Lekki, Lagos, Nigeria",
   // TODO: replace "#" with the real profile URLs.
   socials: [
     { network: "facebook", href: "#" },
@@ -29,381 +33,682 @@ export const site = {
   ] as const,
 };
 
-export const nav = [
-  { label: "Services", href: "/services" },
-  { label: "Case Studies", href: "/case-studies" },
-  { label: "Industries", href: "/industries" },
+/** Header navigation. "Home" only shows in the mobile menu (the logo links home on desktop). */
+export const nav: (Link & { mobileOnly?: boolean })[] = [
+  { label: "Home", href: "/", mobileOnly: true },
   { label: "About", href: "/about" },
+  { label: "Services", href: "/services" },
+  { label: "Who We Serve", href: "/who-we-serve" },
+  { label: "Our Work", href: "/our-work" },
+  { label: "Insights", href: "/insights" },
   { label: "Contact", href: "/contact" },
 ];
 
-export const hero = {
-  eyebrow: "AI-powered digital solutions",
-  headline: "Engineering AI-Powered Digital Solutions That Solve Real Business Problems",
-  lede:
-    "We design and deliver AI-driven software and digital solutions that solve real business challenges and drive sustainable growth for startups, SMEs, and organisations.",
+export const navCta: Link = { label: "Let's Talk", href: "/contact" };
+
+/* ------------------------------------------------------------------ */
+/* SEO titles and descriptions (SEO METADATA in website-content.md).   */
+/* how-we-work and the case study template are written in the same     */
+/* style, as the content file has none for them.                       */
+/* ------------------------------------------------------------------ */
+
+export const seo = {
+  home: {
+    title: "CDMware | Business Innovation, Digital Solutions & AI Engineering",
+    description: site.description,
+  },
+  about: {
+    title: "About CDMware | Innovation & Technology",
+    description:
+      "Discover CDMware, an innovation and technology company connecting business strategy, digital innovation and AI-powered engineering.",
+  },
+  services: {
+    title: "Our Services | Business Innovation & AI Solutions | CDMware",
+    description:
+      "Explore CDMware's business model advisory, digital strategy, custom software development, AI agents and intelligent automation services.",
+  },
+  whoWeServe: {
+    title: "Solutions for Startups, SMEs & Organizations | CDMware",
+    description:
+      "CDMware works with founders, startups, SMEs and organizations to strengthen business models and enable growth through intelligent technology.",
+  },
+  howWeWork: {
+    title: "How We Work | From Understanding to Execution | CDMware",
+    description:
+      "See how CDMware works: discovery, business assessment, strategic recommendations, solution definition, engineering and continued improvement.",
+  },
+  ourWork: {
+    title: "Case Studies & Projects | CDMware",
+    description:
+      "Explore CDMware's business innovation, digital product and AI engineering projects. Discover our approach to solving real business challenges.",
+  },
+  insights: {
+    title: "Business, Digital Innovation & AI Insights | CDMware",
+    description:
+      "Explore practical insights on business models, digital innovation, artificial intelligence, automation and software engineering.",
+  },
+  contact: {
+    title: "Contact CDMware | Let's Engineer Your Vision",
+    description:
+      "Talk to CDMware about your business idea, digital strategy or AI-powered solution. Start a conversation with our team.",
+  },
+  terms: {
+    title: "Terms of Services | CDMware",
+    description: "The terms and conditions for using the CDMware website and services.",
+  },
+  privacy: {
+    title: "Privacy Policy | CDMware",
+    description: "How CDMware collects, uses and protects your personal information.",
+  },
+  /** For /our-work/[slug]. */
+  caseStudy: (title: string) => `${title} | Case Study | CDMware`,
 };
 
+/* ------------------------------------------------------------------ */
+/* Shared calls to action                                              */
+/* ------------------------------------------------------------------ */
+
+export const ctas = {
+  startConversation: { label: "Start a Conversation", href: "/contact" },
+  exploreServices: { label: "Explore Our Services", href: "/services" },
+  initialConsultation: "Book an Initial Consultation",
+  whatsapp: "Chat on WhatsApp",
+};
+
+/** The closing call to action, used at the end of the home page and by ConsultationBand. */
+export const closingCta = {
+  title: "Your Vision Deserves the Right Foundation.",
+  text: "Whether you are exploring a new business idea, refining an existing model or looking to leverage technology more effectively, CDMware can help you identify the right direction and engineer the possibilities.",
+  primary: ctas.startConversation,
+  secondary: ctas.exploreServices,
+};
+
+/* ------------------------------------------------------------------ */
+/* PAGE 1: HOME                                                        */
+/* ------------------------------------------------------------------ */
+
+export type ServiceId = "business-innovation" | "digital-innovation" | "ai-powered-engineering";
+
+export const home = {
+  hero: {
+    eyebrow: site.positioning,
+    headline: "Engineering Your Vision.",
+    strapline: "Business Innovation. Digital Innovation. AI-Powered Solution.",
+    paragraphs: [
+      "We help startups, founders, SMEs and organizations turn business ideas into viable models, improve how they operate, and bring their ambitions to life through intelligent digital and AI-powered solutions.",
+      "Before we build, we understand. Before you invest, we help you identify what makes business sense.",
+    ],
+    primary: { label: "Explore What We Do", href: "/services" },
+    secondary: { label: "Let's Discuss Your Business", href: "/contact" },
+  },
+  ticker: ["Business Innovation", "Digital Innovation", "AI-Powered Engineering", "Engineering Your Vision."],
+  intro: {
+    eyebrow: "More Than Technology",
+    title: "Great Solutions Begin With the Right Questions.",
+    paragraphs: [
+      "Every business has a vision. But turning that vision into a sustainable, functional and scalable enterprise requires more than technology.",
+      "It requires understanding the business, identifying the right opportunities, making informed decisions and implementing solutions that address real needs.",
+      "At CDMware, we approach every engagement with this understanding. We examine business models, evaluate operational realities, identify gaps and recommend improvements before determining the technology required.",
+      "We don't believe in building software simply because it can be built. We believe in building what makes sense, what creates value and what moves the business forward.",
+    ],
+  },
+  whatWeDo: {
+    eyebrow: "What We Do",
+    title: "Three Capabilities. One Connected Approach.",
+    listLabel: "Our services include:",
+    capabilities: [
+      {
+        id: "business-innovation",
+        title: "Business Innovation",
+        subheading: "Build on a stronger business foundation.",
+        text: "We work with founders, startups and established businesses to examine, validate and refine their business models. We help identify opportunities, address structural gaps and develop better approaches to creating, delivering and capturing value.",
+        items: [
+          "Business model assessment and analysis",
+          "Business idea validation",
+          "Business model design and refinement",
+          "Value proposition development",
+          "Customer and market analysis",
+          "Revenue model assessment",
+          "Strategic business advisory",
+          "Business growth and scalability planning",
+        ],
+      },
+      {
+        id: "digital-innovation",
+        title: "Digital Innovation",
+        subheading: "Make technology work for your business.",
+        text: "We help businesses identify opportunities to use technology more effectively. From digital strategy to process improvement, we develop practical approaches to modernizing operations, improving efficiency and creating better digital experiences.",
+        items: [
+          "Digital strategy and advisory",
+          "Digital innovation planning",
+          "Business process analysis and optimization",
+          "Technology assessment and architecture",
+          "Digital product strategy",
+          "Workflow improvement",
+          "Digitalization of business operations",
+          "Technology implementation roadmaps",
+        ],
+      },
+      {
+        id: "ai-powered-engineering",
+        title: "AI-Powered Engineering",
+        subheading: "Turn the right ideas into intelligent solutions.",
+        text: "We design, develop and implement digital products and intelligent systems that address clearly defined business and operational needs.",
+        items: [
+          "AI-powered software applications",
+          "AI agents and multi-agent systems",
+          "Intelligent workflow automation",
+          "Custom web and mobile applications",
+          "Enterprise software solutions",
+          "API development and system integration",
+          "Data intelligence and analytics",
+          "Intelligent business tools and platforms",
+        ],
+      },
+    ] satisfies { id: ServiceId; title: string; subheading: string; text: string; items: string[] }[],
+  },
+  approach: {
+    eyebrow: "Our Approach",
+    title: "We Understand Before We Engineer.",
+    paragraphs: [
+      "Technology investments should be informed by business realities, not assumptions.",
+      "Our approach begins with understanding what you are trying to achieve, the model behind it and the challenges you face.",
+      "We assess the business opportunity, identify gaps, recommend improvements and determine where digital technology and artificial intelligence can create meaningful value.",
+      "Sometimes, the best recommendation is to improve an existing process rather than build a new application. We are comfortable making that recommendation because the right solution matters more than simply delivering a software project.",
+    ],
+    cta: { label: "Let's Examine Your Business", href: "/contact" },
+  },
+  whoWeWorkWith: {
+    eyebrow: "Who We Work With",
+    title: "Supporting Businesses at Different Stages of Growth.",
+    audiences: [
+      {
+        id: "startups-founders",
+        title: "Startups & Founders",
+        text: "From early-stage ideas to growing ventures, we help founders evaluate business opportunities, refine their models, define digital products and build the technology needed to execute their vision.",
+      },
+      {
+        id: "smes",
+        title: "Small & Medium Enterprises",
+        text: "We help SMEs improve their business models, optimize processes, adopt relevant technologies and develop intelligent solutions that support operational efficiency and growth.",
+      },
+      {
+        id: "organizations-institutions",
+        title: "Organizations & Institutions",
+        text: "We work with established organizations and institutions to assess technology opportunities, modernize operations, improve existing systems and implement digital and AI-powered solutions.",
+      },
+    ] satisfies { id: AudienceId; title: string; text: string }[],
+    linkLabel: "Who We Serve",
+  },
+  whyUs: {
+    eyebrow: "Why CDMware?",
+    title: "We Think Beyond the Build.",
+    points: [
+      {
+        title: "Business Understanding First",
+        text: "We take time to understand your business model, objectives, customers and operational realities before recommending technology.",
+      },
+      {
+        title: "Strategic Thinking",
+        text: "We help identify gaps, evaluate opportunities and make informed decisions before resources are committed to implementation.",
+      },
+      {
+        title: "Purposeful Engineering",
+        text: "We build solutions around defined business needs, not technology trends or unnecessary complexity.",
+      },
+      {
+        title: "Intelligent Technology",
+        text: "We apply artificial intelligence, automation, data and modern engineering to create practical solutions.",
+      },
+      {
+        title: "A Connected Partnership",
+        text: "We bring business thinking and technical execution together, helping clients move from ideas and strategy to implementation.",
+      },
+    ],
+  },
+  process: {
+    eyebrow: "Our Process",
+    title: "From Understanding to Execution.",
+    steps: [
+      { title: "Discover", text: "We listen, ask questions and understand your business, idea, customers, challenges and objectives." },
+      {
+        title: "Assess",
+        text: "We examine your business model, value proposition, revenue structure, market assumptions and operational processes to identify opportunities and weaknesses.",
+      },
+      {
+        title: "Recommend",
+        text: "We present findings, recommend improvements and identify the most appropriate strategic and technological direction.",
+      },
+      {
+        title: "Design",
+        text: "Where a digital solution is justified, we define the requirements, architecture, user experience and implementation roadmap.",
+      },
+      { title: "Engineer", text: "We develop, integrate and configure the appropriate digital and AI-powered solutions." },
+      {
+        title: "Validate & Deploy",
+        text: "We test the solution, assess its performance against agreed requirements and prepare it for implementation.",
+      },
+      {
+        title: "Support & Evolve",
+        text: "We provide agreed support and help identify opportunities for further improvement as the business evolves.",
+      },
+    ],
+    link: { label: "See how we work", href: "/how-we-work" },
+  },
+  testimonials: {
+    title: "What our clients say",
+    intro: "Startups, SMEs and organizations in Nigeria and beyond.",
+  },
+};
+
+/* ------------------------------------------------------------------ */
+/* PAGE 2: ABOUT                                                       */
+/* ------------------------------------------------------------------ */
+
+export const about = {
+  crumb: "About",
+  eyebrow: "About CDMware",
+  title: "We Believe in the Power of Ideas, Strategy and Intelligent Execution.",
+  paragraphs: [
+    "CDMware is an innovation and technology company committed to helping businesses develop stronger foundations, explore new possibilities and achieve more through intelligent technology.",
+    "We work at the intersection of business thinking and technology engineering.",
+    "Our work begins with understanding. We engage with founders, startups, SMEs and organizations to examine their business models, understand their challenges, identify opportunities and determine how innovation and technology can create meaningful value.",
+    "From refining business models and developing digital strategies to engineering AI-powered solutions, we help turn business possibilities into practical outcomes.",
+    "We believe technology should serve a purpose. It should solve a problem, improve an experience, strengthen an operation or create an opportunity.",
+    "That is why we look beyond what needs to be built and focus on why it needs to exist.",
+  ],
+  mission: {
+    title: "Our Mission",
+    text: "To help businesses unlock their potential through business innovation, strategic thinking and intelligent technology.",
+  },
+  vision: {
+    title: "Our Vision",
+    text: "To become a trusted innovation and technology partner, enabling businesses and organizations to build, evolve and thrive in an increasingly digital world.",
+  },
+  philosophy: {
+    title: "Our Philosophy",
+    line: ["Understand the business.", "Rethink the possibilities.", "Engineer the solution."],
+    paragraphs: [
+      "We believe that successful innovation requires more than good ideas and advanced technology. It requires a clear understanding of the problem, a viable approach to solving it and the ability to execute effectively.",
+      "We don't encourage businesses to invest in technology without first understanding what they need and why they need it.",
+      "At CDMware, the objective is not simply to build more. It is to build better.",
+    ],
+  },
+};
+
+/* ------------------------------------------------------------------ */
+/* PAGE 3: SERVICES                                                    */
+/* ------------------------------------------------------------------ */
+
 export type Service = {
-  slug: string;
+  /** Also the section's anchor on /services, e.g. /services#digital-innovation. */
+  id: ServiceId;
   title: string;
-  short: string;
-  summary: string;
+  subheading: string;
   intro: string;
-  offerings: { title: string; text: string }[];
-  outcomes: string[];
-  tools: string[];
+  items: string[];
+  deliverables: string;
+};
+
+export const servicesPage = {
+  crumb: "Services",
+  eyebrow: "Our Services",
+  title: "Connecting Business Thinking with Technology Execution.",
+  intro:
+    "We combine business model analysis, digital strategy and AI-powered engineering to help clients make informed decisions and implement solutions that matter.",
+  listLabel: "Services",
+  deliverablesLabel: "Deliverables may include:",
 };
 
 export const services: Service[] = [
   {
-    slug: "software-web-development",
-    title: "AI-Powered Software & Web Development",
-    short: "Software & Web",
-    summary:
-      "Build powerful web applications, mobile apps, and custom software solutions tailored to your business needs.",
+    id: "business-innovation",
+    title: "Business Innovation",
+    subheading: "Rethink the model. Strengthen the opportunity.",
     intro:
-      "From internal tools to customer-facing products, we engineer software that fits how your business actually works, with AI built in where it adds real value.",
-    offerings: [
-      {
-        title: "AI-Enabled Custom Software Solutions",
-        text: "Bespoke systems that automate repetitive work, surface insights from your data and scale as you grow.",
-      },
-      {
-        title: "Web & Mobile App Development",
-        text: "Fast, secure web and mobile applications for iOS, Android and the browser, built on modern frameworks.",
-      },
-      {
-        title: "Responsive Website Design",
-        text: "Websites that load quickly, look sharp on every screen and turn visitors into enquiries.",
-      },
+      "A promising idea does not automatically translate into a viable business. We help clients examine the assumptions, structures and strategies behind their businesses.",
+    items: [
+      "Business model assessment",
+      "Business idea evaluation and validation",
+      "Business model design and refinement",
+      "Value proposition development",
+      "Customer segmentation and market analysis",
+      "Revenue model evaluation",
+      "Operational model assessment",
+      "Strategic business advisory",
     ],
-    outcomes: [
-      "Software designed around your real business processes",
-      "Scalable, secure architecture that grows with you",
-      "AI features where they save time or money",
-      "Clear documentation and handover to your team",
-    ],
-    tools: ["JavaScript", "Python", "Java", "C#", "PHP", "Dart", "Swift", "AWS", "Azure", "Google Cloud", "Docker", "Kubernetes", "OpenAI", "TensorFlow"],
+    deliverables:
+      "Business assessment reports, business model recommendations, value proposition frameworks, market and customer insights, and strategic recommendations.",
   },
   {
-    slug: "creative-design",
-    title: "Creative Design Services",
-    short: "Creative Design",
-    summary:
-      "Stand out with stunning visuals and brand identity that captures attention and converts visitors to customers.",
+    id: "digital-innovation",
+    title: "Digital Innovation",
+    subheading: "Identify where technology can make a difference.",
     intro:
-      "Good design makes your product easier to use and your brand easier to remember. Our creative team handles everything from interfaces to identity to video.",
-    offerings: [
-      {
-        title: "UI/UX Design & Prototyping",
-        text: "User research, wireframes and clickable prototypes that make products intuitive before a line of code is written.",
-      },
-      {
-        title: "Brand Identity & Graphics",
-        text: "Logos, colour systems, typography and marketing graphics that give your brand a consistent, confident look.",
-      },
-      {
-        title: "Video Editing & Motion Graphics",
-        text: "Product videos, social clips and animated explainers that tell your story in seconds.",
-      },
+      "We help businesses determine how digital technology can support their objectives, improve processes and create better ways of operating.",
+    items: [
+      "Digital strategy development",
+      "Digital readiness assessment",
+      "Technology advisory",
+      "Digital product strategy",
+      "Business process analysis",
+      "Process optimization",
+      "Workflow redesign",
+      "Technology architecture and roadmaps",
     ],
-    outcomes: [
-      "Interfaces your customers find easy to use",
-      "A consistent brand across every touchpoint",
-      "Visual content ready for web, social and print",
-      "Design files your team can reuse",
-    ],
-    tools: ["Figma", "Adobe XD", "Sketch", "Premiere Pro", "After Effects", "Final Cut Pro", "DaVinci Resolve"],
+    deliverables:
+      "Digital strategy documents, process improvement recommendations, technology roadmaps, solution architecture and implementation plans.",
   },
   {
-    slug: "digital-marketing",
-    title: "Digital Marketing & Growth",
-    short: "Digital Marketing",
-    summary:
-      "Reach your audience and accelerate growth with data-driven marketing strategies that deliver results.",
+    id: "ai-powered-engineering",
+    title: "AI-Powered Engineering",
+    subheading: "Engineer intelligent solutions for real-world needs.",
     intro:
-      "We combine analytics, content and paid media to put your business in front of the right people, and we measure what works so your budget goes further.",
-    offerings: [
-      {
-        title: "SEO & Website Analytics",
-        text: "Technical and content SEO, plus analytics set-up that shows exactly where your visitors come from and what they do.",
-      },
-      {
-        title: "Social Media Management",
-        text: "Content calendars, community management and reporting across the platforms your customers use.",
-      },
-      {
-        title: "Google & Meta Ads Campaigns",
-        text: "Targeted campaigns on Google, Facebook and Instagram, optimised continuously for leads and sales.",
-      },
+      "We build technology that enables businesses to operate more effectively, automate appropriate processes and create new digital capabilities.",
+    items: [
+      "AI-powered applications",
+      "AI agents and multi-agent systems",
+      "Intelligent workflow automation",
+      "Custom software development",
+      "Web and mobile application development",
+      "Enterprise application development",
+      "API and third-party integrations",
+      "Data processing and analytics solutions",
     ],
-    outcomes: [
-      "Higher visibility in search results",
-      "A steady, engaged social presence",
-      "Ad spend tracked against real results",
-      "Clear monthly reporting",
-    ],
-    tools: ["Search Console", "Google Analytics", "Google Ads", "Meta Ads", "SEMrush"],
-  },
-  {
-    slug: "it-consulting",
-    title: "IT Consultant Solutions",
-    short: "IT Consulting",
-    summary:
-      "We support organisations, SMEs, startups and sole proprietors to make effective use of technology and create successful digital transformations.",
-    intro:
-      "Not sure which technology to invest in, or how to modernise what you already have? We help you make clear, practical technology decisions.",
-    offerings: [
-      {
-        title: "Digital & IT Strategy Consulting",
-        text: "A technology roadmap aligned with your business goals, budget and timeline.",
-      },
-      {
-        title: "Software Architecture & System Advisory",
-        text: "Independent reviews and design of systems that are secure, maintainable and ready to scale.",
-      },
-      {
-        title: "Process Optimisation & Automation Consulting",
-        text: "We map your workflows and find where automation and AI can remove manual effort.",
-      },
-    ],
-    outcomes: [
-      "A clear, prioritised technology roadmap",
-      "Lower risk on major technology decisions",
-      "Less manual work through automation",
-      "Teams equipped to run new systems",
-    ],
-    tools: ["Azure", "AWS", "Google Cloud", "GitHub", "GitLab", "PostgreSQL", "MSSQL", "Oracle"],
+    deliverables:
+      "Working software applications, AI-enabled systems, intelligent agents, automated workflows, integrations, technical documentation and deployment support.",
   },
 ];
 
-export const about = {
-  body:
-    "At CDMWare, we build software solutions, provide creative design services, and execute digital marketing strategies that help businesses thrive. We work with startups, SMEs, and established organisations to engineer digital products and solutions that solve real business problems and drive measurable, sustainable growth.",
-  purpose:
-    "To empower businesses, institutions, and individuals with tailored digital services that solve real problems, enhance visibility, and drive growth.",
-  vision: "To be a trusted global leader in delivering innovative, affordable, and high-quality digital solutions.",
-  mission:
-    "To empower businesses, organisations, and individuals worldwide with tailored digital services that solve real challenges, enhance visibility, and drive sustainable growth.",
-  edge: "We combine global best practices with deep African market expertise.",
+/* ------------------------------------------------------------------ */
+/* PAGE 4: WHO WE SERVE                                                */
+/* ------------------------------------------------------------------ */
+
+export type AudienceId = "startups-founders" | "smes" | "organizations-institutions";
+
+export const whoWeServe = {
+  crumb: "Who We Serve",
+  eyebrow: "Who We Work With",
+  title: "Different Businesses. Different Challenges. A Shared Commitment to Better Solutions.",
+  helpLabel: "We can help you with:",
+  audiences: [
+    {
+      id: "startups-founders",
+      title: "Startups & Founders",
+      situation: "You have an idea, an opportunity or an emerging business.",
+      text: "We help you examine its viability, understand your target customers, refine your business model and determine the right digital capabilities to support your growth.",
+      helpWith: [
+        "Business idea assessment",
+        "Business model development",
+        "Startup digital strategy",
+        "Product definition and validation",
+        "MVP planning and development",
+        "AI-powered product engineering",
+      ],
+    },
+    {
+      id: "smes",
+      title: "SMEs",
+      situation:
+        "You have an established business and want to operate more effectively, reach new opportunities or modernize your operations.",
+      text: "We help identify operational gaps, improve business processes and determine where digital solutions and AI can create practical value.",
+      helpWith: [
+        "Business model refinement",
+        "Operational assessment",
+        "Digitalization strategy",
+        "Workflow automation",
+        "Custom business applications",
+        "AI-powered operational solutions",
+      ],
+    },
+    {
+      id: "organizations-institutions",
+      title: "Organizations & Institutions",
+      situation:
+        "You need to improve existing systems, explore new technology opportunities or develop capabilities that support your organizational objectives.",
+      text: "We work with organizations to assess their requirements, develop practical technology strategies and implement appropriate digital solutions.",
+      helpWith: [
+        "Technology advisory",
+        "Digital strategy",
+        "Systems assessment",
+        "Enterprise software development",
+        "Process optimization",
+        "AI integration and automation",
+      ],
+    },
+  ] satisfies { id: AudienceId; title: string; situation: string; text: string; helpWith: string[] }[],
 };
 
-export const process = [
-  {
-    title: "Discovery & Consultation",
-    text: "We start by deeply understanding your business, goals, challenges, and target audience. This foundation ensures we create solutions that truly address your needs.",
-  },
-  {
-    title: "Strategy & Planning",
-    text: "Once we align on objectives, we develop a comprehensive strategy and detailed project plan that serves as our roadmap throughout the project.",
-  },
-  {
-    title: "Design & Prototyping",
-    text: "Our creative team brings your vision to life with intuitive user interfaces and designs that are both beautiful and functional.",
-  },
-  {
-    title: "Development & Implementation",
-    text: "Our developers transform approved designs into fully functional, high-performance applications using modern technologies and best practices.",
-  },
-  {
-    title: "Testing & Quality Assurance",
-    text: "Before launch, we rigorously test every aspect of your project to ensure it works flawlessly across all devices, browsers, and scenarios.",
-  },
-  {
-    title: "Launch & Deployment",
-    text: "We carefully deploy your project to production, ensuring a smooth transition with minimal downtime and maximum impact.",
-  },
-  {
-    title: "Training & Handover",
-    text: "We make sure your team is fully equipped to manage and maintain your new solution, with hands-on training and detailed documentation.",
-  },
-  {
-    title: "Support & Continuous Optimisation",
-    text: "Our partnership doesn't end at launch. We provide ongoing support, maintenance, and optimisation so your solution keeps performing at its best.",
-  },
-];
+/* ------------------------------------------------------------------ */
+/* PAGE 5: HOW WE WORK                                                 */
+/* ------------------------------------------------------------------ */
 
-export const whyUs = [
-  {
-    title: "Business-Driven Digital Solutions",
-    text: "We don't just build software — we solve real business problems. Every solution is designed with clear objectives, measurable outcomes, and long-term value in mind.",
+export const howWeWork = {
+  crumb: "How We Work",
+  eyebrow: "How We Work",
+  title: "We Don't Rush to Build. We Work to Get It Right.",
+  intro:
+    "Every engagement is different, but our approach follows a consistent principle: understand the need before engineering the solution.",
+  stepLabel: "Step",
+  steps: [
+    { title: "Discovery", text: "We understand your vision, business objectives, current challenges and expectations." },
+    {
+      title: "Business Assessment",
+      text: "We examine your business model, customers, value proposition, revenue structure and operational processes.",
+    },
+    {
+      title: "Strategic Recommendations",
+      text: "We identify gaps, opportunities and possible improvements. We recommend the most suitable direction based on our findings.",
+    },
+    {
+      title: "Solution Definition",
+      text: "We determine whether technology is required, what should be built and how the proposed solution will support the business.",
+    },
+    { title: "Engineering & Implementation", text: "We design, develop, integrate and deploy the agreed solution." },
+    {
+      title: "Evaluation & Improvement",
+      text: "We assess the delivered solution against agreed requirements and identify opportunities for continued improvement.",
+    },
+  ],
+  note: {
+    title: "Important",
+    text: "Not every engagement needs to progress through every stage. Some clients may need strategic assessment alone, while others may require a complete journey from business analysis to software implementation.",
   },
-  {
-    title: "AI-Powered & Scalable Technology",
-    text: "We use modern technologies and AI-enabled systems to build scalable, secure, and future-ready solutions that grow with your business.",
-  },
-  {
-    title: "Data-Driven Growth & Marketing",
-    text: "We use insights, analytics, and proven digital marketing strategies to increase visibility, attract the right audience, and drive sustainable growth.",
-  },
-  {
-    title: "Trusted End-to-End Partner",
-    text: "From consultation and strategy to development, launch, and optimisation, we work as a long-term technology partner, not just a service provider.",
-  },
-];
+};
 
-// TODO: replace these placeholder figures with real numbers.
-export const stats = [
-  { label: "Satisfied clients", value: "50+" },
-  { label: "Finished projects", value: "100+" },
-  { label: "Awards", value: "5+" },
-  { label: "Support", value: "24/7" },
-];
+/* ------------------------------------------------------------------ */
+/* PAGE 6: OUR WORK (case studies)                                     */
+/* ------------------------------------------------------------------ */
 
-export const industries = [
-  {
-    slug: "startups-smes",
-    title: "Startups & SMEs",
-    tagline: "Scale faster with technology built for growth",
-    text: "Affordable MVPs, websites and marketing that help young businesses launch quickly and grow without heavy upfront costs.",
-  },
-  {
-    slug: "corporate",
-    title: "Corporate Organisations",
-    tagline: "Enterprise solutions that enhance efficiency",
-    text: "Custom enterprise software, system integration and automation that streamline operations across departments.",
-  },
-  {
-    slug: "ngos",
-    title: "NGOs & Foundations",
-    tagline: "Amplify your impact with the right digital tools",
-    text: "Websites, donor and programme management tools, and campaigns that help mission-driven organisations reach more people.",
-  },
-  {
-    slug: "education",
-    title: "Educational Institutions",
-    tagline: "Modern platforms for modern learning",
-    text: "Learning platforms, school portals and admin systems that make teaching, learning and administration easier.",
-  },
-  {
-    slug: "healthcare",
-    title: "Healthcare & Wellness",
-    tagline: "Digital solutions for better care",
-    text: "Secure booking, records and patient-engagement tools that help providers deliver better care.",
-  },
-  {
-    slug: "government",
-    title: "Government",
-    tagline: "Digital solutions for government administrations",
-    text: "Citizen-facing portals, data systems and digital transformation support for public-sector bodies.",
-  },
-];
+export const caseStudyCategories = [
+  "Business Innovation & Strategy",
+  "Digital Product Development",
+  "AI & Intelligent Automation",
+  "Enterprise Systems & Integrations",
+  "Digital Experience & Design",
+] as const;
 
+export type CaseStudyCategory = (typeof caseStudyCategories)[number];
+
+/**
+ * One case study. Adding an entry to `caseStudies` creates its card on
+ * /our-work and its page at /our-work/<slug>.
+ *
+ * From the content guidelines: only publish projects with accurate
+ * descriptions and permission to disclose client information. Where client
+ * information is confidential, use an anonymized case study with approval.
+ */
 export type CaseStudy = {
   slug: string;
   title: string;
-  category: string;
-  service: string; // service slug
+  category: CaseStudyCategory;
+  /** One or two sentences for the card and the page's meta description. */
   summary: string;
+  /** A path in public/images/, e.g. "/images/my-project.webp". Leave "" for a branded placeholder. */
   image: string;
-  client: string;
+  /** 1. The client or project context. */
+  context: string;
+  /** 2. The original challenge or opportunity. */
   challenge: string;
+  /** 3. The business or operational assessment. */
+  assessment: string;
+  /** 4. The approach and recommendations. */
   approach: string[];
-  results: { label: string; value: string }[];
+  /** 5. The digital or AI solution implemented, if applicable. */
+  solution?: string;
+  /** 6. The verified outcome. */
+  outcome: string;
 };
 
-// TODO: the old site only had titles for these. Replace the client name,
-// challenge, approach and results with the real project details.
-export const caseStudies: CaseStudy[] = [
-  {
-    slug: "enterprise-software-solution",
-    title: "Enterprise Software Solution",
-    category: "Software Development",
-    service: "software-web-development",
-    summary: "A custom, AI-enabled platform that replaced manual processes and gave leadership real-time visibility.",
-    image: "/images/case-enterprise-software.webp",
-    client: "Client name (TODO)",
-    challenge:
-      "TODO: Describe the client's situation and the problem they needed solved, e.g. disconnected spreadsheets, slow reporting, manual approvals.",
-    approach: [
-      "TODO: Discovery workshops with stakeholders to map existing workflows",
-      "TODO: Designed and built a custom platform with role-based dashboards",
-      "TODO: Integrated with existing systems and automated reporting",
-    ],
-    results: [
-      { label: "Faster reporting", value: "TODO" },
-      { label: "Manual hours saved", value: "TODO" },
-      { label: "Users onboarded", value: "TODO" },
-    ],
+// No case studies have been approved for publication yet.
+export const caseStudies: CaseStudy[] = [];
+
+export const ourWork = {
+  crumb: "Our Work",
+  eyebrow: "Our Work",
+  title: "Ideas, Challenges and the Solutions Behind Them.",
+  intro:
+    "We believe the best way to demonstrate our capabilities is to show how we approach real problems and the solutions we develop.",
+  categoriesTitle: "Case study categories",
+  empty: {
+    title: "Case studies are being prepared.",
+    text: "We are preparing case studies for publication. In the meantime, we would be glad to hear about your business.",
   },
-  {
-    slug: "enterprise-ui-ux-product-design",
-    title: "Enterprise UI/UX & Creative Product Design",
-    category: "Design",
-    service: "creative-design",
-    summary: "A design-focused redesign that made a complex product simple, consistent and easy to adopt.",
-    image: "", // TODO: add a real project image (the old one was a stock template)
-    client: "Client name (TODO)",
-    challenge: "TODO: Describe the usability or brand problems with the product before the redesign.",
-    approach: [
-      "TODO: User research and usability testing",
-      "TODO: New design system and component library",
-      "TODO: Clickable prototypes validated with real users",
-    ],
-    results: [
-      { label: "Task completion", value: "TODO" },
-      { label: "Support tickets", value: "TODO" },
-      { label: "Screens redesigned", value: "TODO" },
-    ],
+  detail: {
+    context: "The context",
+    challenge: "The challenge or opportunity",
+    assessment: "Our assessment",
+    approach: "Approach and recommendations",
+    solution: "The solution",
+    outcome: "The outcome",
+    back: "All case studies",
   },
-  {
-    slug: "digital-growth-marketing-performance",
-    title: "Digital Growth & Marketing Performance",
-    category: "Digital Marketing",
-    service: "digital-marketing",
-    summary: "A results-driven campaign combining SEO, social and paid ads to grow qualified leads.",
-    image: "/images/case-marketing.webp",
-    client: "Client name (TODO)",
-    challenge: "TODO: Describe the client's visibility or lead-generation challenge.",
-    approach: [
-      "TODO: Technical SEO audit and content plan",
-      "TODO: Google and Meta ad campaigns with conversion tracking",
-      "TODO: Monthly reporting and optimisation",
-    ],
-    results: [
-      { label: "Organic traffic", value: "TODO" },
-      { label: "Qualified leads", value: "TODO" },
-      { label: "Cost per lead", value: "TODO" },
-    ],
+};
+
+/* ------------------------------------------------------------------ */
+/* PAGE 7: INSIGHTS                                                    */
+/* ------------------------------------------------------------------ */
+
+export const insights = {
+  crumb: "Insights",
+  title: "Ideas Worth Exploring. Knowledge Worth Sharing.",
+  intro:
+    "We explore the intersection of business, innovation and technology to help business leaders, founders and organizations make more informed decisions.",
+  categoriesTitle: "What we write about",
+  categories: [
+    {
+      title: "Business Innovation",
+      text: "Business models, entrepreneurship, business viability, market opportunities and strategic thinking.",
+    },
+    {
+      title: "Digital Innovation",
+      text: "Digital strategy, digital products, process optimization, technology adoption and operational efficiency.",
+    },
+    {
+      title: "Artificial Intelligence",
+      text: "AI applications, intelligent agents, automation, AI adoption and practical AI opportunities for businesses.",
+    },
+    {
+      title: "Engineering & Technology",
+      text: "Software architecture, system integration, engineering practices and emerging technologies.",
+    },
+  ],
+  upcomingTitle: "Coming soon",
+  upcoming: [
+    "Before You Build an App: Questions Every Founder Should Answer.",
+    "Is Your Business Model Ready to Scale?",
+    "When Should a Business Invest in Custom Software?",
+    "Practical Applications of AI for Small and Medium-Sized Businesses.",
+    "Business Process Automation: What Should You Automate First?",
+    "Building an AI-Powered Business: Strategy Before Technology.",
+  ],
+};
+
+/* ------------------------------------------------------------------ */
+/* PAGE 8: CONTACT                                                     */
+/* ------------------------------------------------------------------ */
+
+export const contact = {
+  crumb: "Contact",
+  title: "Let's Talk About Your Vision.",
+  lede: "Whether you are developing a new business idea, refining an existing business model or exploring opportunities to use technology more effectively, we would like to understand what you are working towards.",
+  formTitle: ctas.startConversation.label,
+  formIntro: "Tell us about your business, your challenges and what you hope to achieve.",
+  detailsTitle: "Contact details",
+  consultation: {
+    title: ctas.initialConsultation,
+    text: "Our first conversation is about understanding your needs and determining how we can help.",
+    hint: "Choose “Initial consultation” in the form and we'll be in touch to arrange a time.",
   },
-];
+  form: {
+    serviceLabel: "What would you like to discuss?",
+    servicePlaceholder: "Choose an option",
+    serviceOptions: [
+      "Business Innovation",
+      "Digital Innovation",
+      "AI-Powered Engineering",
+      "Initial consultation",
+      "Something else",
+    ],
+    messageLabel: "Tell us about your business",
+    submit: ctas.startConversation.label,
+  },
+};
+
+/* ------------------------------------------------------------------ */
+/* FOOTER                                                              */
+/* ------------------------------------------------------------------ */
+
+export const footer = {
+  title: `${site.name} — ${site.tagline}`,
+  descriptor: site.descriptors,
+  text: "We help businesses rethink possibilities, strengthen their models and engineer intelligent solutions that create meaningful value.",
+  quickLinksTitle: "Quick Links",
+  quickLinks: [
+    { label: "Home", href: "/" },
+    { label: "About Us", href: "/about" },
+    { label: "Services", href: "/services" },
+    { label: "Who We Serve", href: "/who-we-serve" },
+    { label: "Our Work", href: "/our-work" },
+    { label: "Insights", href: "/insights" },
+    { label: "Contact", href: "/contact" },
+  ] satisfies Link[],
+  servicesTitle: "Services",
+  services: services.map((s) => ({ label: s.title, href: `/services#${s.id}` })),
+  howWeWork: { label: "How We Work", href: "/how-we-work" },
+  contactTitle: "Contact",
+  legal: [
+    { label: "Terms of Services", href: "/terms-of-services" },
+    { label: "Privacy Policy", href: "/privacy-policy" },
+  ] satisfies Link[],
+  /** Rendered as "Copyright © <current year> CDMware. All Rights Reserved." */
+  copyright: { before: "Copyright ©", after: `${site.name}. All Rights Reserved.` },
+};
+
+/* ------------------------------------------------------------------ */
+/* Client testimonials (real, kept from the previous site)             */
+/* ------------------------------------------------------------------ */
 
 export const testimonials = [
   {
     name: "Elfrida",
     role: "CEO, PIS Ltd · Lagos",
     quote:
-      "CDMWare didn't just build our product, they partnered with us. Their technical expertise, attention to detail, and ability to translate ideas into a functional, high-performing product exceeded our expectations. We launched faster, cleaner, and more confidently because of their team.",
+      "CDMware didn't just build our product, they partnered with us. Their technical expertise, attention to detail, and ability to translate ideas into a functional, high-performing product exceeded our expectations. We launched faster, cleaner, and more confidently because of their team.",
   },
   {
     name: "Uzo",
     role: "CEO, Izoduwa FSH · UK",
     quote:
-      "Working with CDMWare completely transformed how we operate digitally. From the initial consultation to delivery, their team understood our business challenges and delivered a solution that was both scalable and easy to use. Our online visibility and operational efficiency improved significantly within weeks.",
+      "Working with CDMware completely transformed how we operate digitally. From the initial consultation to delivery, their team understood our business challenges and delivered a solution that was both scalable and easy to use. Our online visibility and operational efficiency improved significantly within weeks.",
   },
   {
     name: "Stella",
     role: "Head of IT, CDMT · Bulgaria",
     quote:
-      "What stood out about CDMWare was their strategic approach. They took time to understand our systems, proposed improvements, and delivered a secure, well-architected solution aligned with our long-term goals. Their professionalism and technical depth make them a trusted technology partner.",
+      "What stood out about CDMware was their strategic approach. They took time to understand our systems, proposed improvements, and delivered a secure, well-architected solution aligned with our long-term goals. Their professionalism and technical depth make them a trusted technology partner.",
   },
 ];
 
-export const techStack: { group: string; items: string[] }[] = [
-  { group: "Languages", items: ["JavaScript", "Java", "Python", "C#", "PHP", "Dart", "Swift"] },
-  { group: "Cloud & DevOps", items: ["Microsoft Azure", "AWS", "Google Cloud", "Docker", "Kubernetes", "GitLab", "GitHub"] },
-  { group: "Databases", items: ["MySQL", "PostgreSQL", "MSSQL", "Firebase", "MongoDB", "Realm", "Oracle"] },
-  { group: "Design & Media", items: ["Figma", "Adobe XD", "Sketch", "Premiere Pro", "After Effects", "Final Cut Pro", "DaVinci Resolve"] },
-  { group: "Marketing & AI", items: ["Search Console", "Google Analytics", "Google Ads", "Meta Ads", "SEMrush", "OpenAI", "TensorFlow"] },
-];
-
-export const consultation = {
-  title: "Book your free consultation",
-  lede: "Schedule a 30-minute call with CDMWare and let's discuss:",
-  points: [
-    { title: "Your business", text: "We want to hear all about you, your business, and your ideas." },
-    { title: "How we work", text: "Our process, custom solutions and support options." },
-    { title: "The next steps", text: "How we'll solve your business problems, and what it takes to get started." },
-  ],
-};
+/** Small labels on link-preview images that have no page crumb of their own. */
+export const ogLabels = { caseStudy: "Case study", legal: "Legal" };

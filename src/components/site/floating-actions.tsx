@@ -11,7 +11,7 @@ export function FloatingActions() {
         href={cruiseWhatsAppLink(site.whatsapp, site.whatsappMessage)}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Chat with CDMWare on WhatsApp"
+        aria-label="Chat with CDMware on WhatsApp"
         className="brutal fixed right-4 bottom-4 z-40 inline-flex size-14 items-center justify-center bg-success text-on-success md:right-6 md:bottom-6"
       >
         <MessageCircle aria-hidden="true" strokeWidth={2.5} className="size-7" />

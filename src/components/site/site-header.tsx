@@ -5,19 +5,19 @@ import { usePathname } from "next/navigation";
 import { ArrowRight } from "lucide-react";
 import { CruiseNavbar } from "@/components/cruise/navbar";
 import { cruiseButtonClasses } from "@/components/cruise/button";
-import { nav } from "@/content/site";
+import { nav, navCta } from "@/content/site";
 import { Logo } from "./logo";
 
 export function SiteHeader() {
   const pathname = usePathname();
   const links = nav.map((l) => ({
     ...l,
-    active: pathname === l.href || pathname.startsWith(`${l.href}/`),
+    active: l.href === "/" ? pathname === "/" : pathname === l.href || pathname.startsWith(`${l.href}/`),
   }));
 
   const cta = (
-    <Link href="/contact" className={cruiseButtonClasses({ variant: "primary" })}>
-      Start a project <ArrowRight aria-hidden="true" />
+    <Link href={navCta.href} className={cruiseButtonClasses({ variant: "primary" })}>
+      {navCta.label} <ArrowRight aria-hidden="true" />
     </Link>
   );
 

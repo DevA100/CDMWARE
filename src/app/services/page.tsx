@@ -1,81 +1,75 @@
 import type { Metadata } from "next";
-import { pageMetadata } from "@/lib/metadata";
-import Link from "next/link";
-import { ArrowRight, Check } from "lucide-react";
-import { ConsultationBand, PageHeader, SectionHeading } from "@/components/site/sections";
+import { Check } from "lucide-react";
+import { ConsultationBand, PageHeader } from "@/components/site/sections";
 import { IconChip, serviceIcons } from "@/components/site/icons";
-import { process, services } from "@/content/site";
+import { seo, services, servicesPage } from "@/content/site";
+import { cx } from "@/lib/cruise-utils";
+import { pageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = pageMetadata({
-  title: "Services",
-  description:
-    "AI-powered software and web development, creative design, digital marketing and IT consulting from CDMWare in Lagos, Nigeria.",
-  path: "/services",
-});
+export const metadata: Metadata = pageMetadata({ ...seo.services, path: "/services" });
 
 export default function ServicesPage() {
   return (
     <>
-      <PageHeader
-        crumbs={[{ label: "Services" }]}
-        title="End-to-end digital services"
-        lede="Software, creative design, digital marketing and IT consulting, designed to accelerate your growth and maximise your digital presence."
-      />
-
-      <section className="section">
-        <div className="site-container flex flex-col gap-8">
-          {services.map((s, i) => (
-            <article
-              key={s.slug}
-              className="brutal brutal-static grid gap-8 p-6 md:p-10 lg:grid-cols-[1.1fr_1fr] lg:items-start"
-            >
-              <div className="flex flex-col gap-5">
-                <div className="flex items-center gap-4">
-                  <IconChip icon={serviceIcons[s.slug]} />
-                  <span className="font-display text-h2 font-extrabold text-ink-muted">0{i + 1}</span>
-                </div>
-                <h2 className="text-h2">{s.title}</h2>
-                <p className="max-w-(--measure) text-body text-ink-muted">{s.intro}</p>
-                <Link
-                  href={`/services/${s.slug}`}
-                  className="brutal on-primary inline-flex min-h-11 items-center gap-2 self-start px-6 py-3 font-display font-extrabold uppercase tracking-[0.03em] no-underline"
-                >
-                  Explore {s.short} <ArrowRight aria-hidden="true" className="size-5" />
-                </Link>
-              </div>
-              <ul className="flex flex-col gap-4">
-                {s.offerings.map((o) => (
-                  <li key={o.title} className="flex gap-3 rounded-brutal border-2 border-ink bg-paper p-4">
-                    <Check aria-hidden="true" strokeWidth={3} className="mt-1 size-5 shrink-0" />
-                    <span className="flex flex-col gap-1">
-                      <span className="font-bold">{o.title}</span>
-                      <span className="text-small text-ink-muted">{o.text}</span>
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </article>
+      <PageHeader crumbs={[{ label: servicesPage.crumb }]} eyebrow={servicesPage.eyebrow} title={servicesPage.title} lede={servicesPage.intro}>
+        <ul className="flex flex-wrap gap-3" aria-label={servicesPage.eyebrow}>
+          {services.map((s) => (
+            <li key={s.id}>
+              <a
+                href={`#${s.id}`}
+                className="brutal inline-flex min-h-11 items-center gap-2 bg-surface px-4 font-display font-extrabold text-ink no-underline"
+              >
+                {s.title}
+              </a>
+            </li>
           ))}
-        </div>
-      </section>
+        </ul>
+      </PageHeader>
 
-      <section className="section on-sky border-t-(length:--border-w) border-ink">
-        <div className="site-container flex flex-col gap-10">
-          <SectionHeading eyebrow="How we work" title="One process across every service" />
-          <ol className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {process.map((p, i) => (
-              <li key={p.title} className="brutal brutal-static flex items-center gap-3 p-4">
-                <span className="on-primary grid size-9 shrink-0 place-items-center rounded-brutal border-2 border-ink font-display font-extrabold">
-                  {i + 1}
+      {services.map((s, i) => (
+        <section
+          key={s.id}
+          id={s.id}
+          aria-labelledby={`${s.id}-title`}
+          className={cx("section scroll-mt-24", i % 2 === 1 && "on-sky border-y-(length:--border-w) border-ink")}
+        >
+          <div className="site-container grid gap-10 lg:grid-cols-[1fr_1.2fr] lg:items-start">
+            <div className="flex flex-col gap-5">
+              <div className="flex items-center gap-4">
+                <IconChip icon={serviceIcons[s.id]} />
+                <span className="font-display text-h1 leading-none font-extrabold text-primary [-webkit-text-stroke:2px_var(--ink)]">
+                  {String(i + 1).padStart(2, "0")}
                 </span>
-                <span className="font-bold">{p.title}</span>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
+              </div>
+              <h2 id={`${s.id}-title`} className="text-h1">
+                {s.title}
+              </h2>
+              <p className="font-display text-h3 font-extrabold">{s.subheading}</p>
+              <p className="max-w-(--measure) text-body text-ink-muted">{s.intro}</p>
+            </div>
 
-      <ConsultationBand compact />
+            <div className="flex flex-col gap-6">
+              <div className="brutal brutal-static flex flex-col gap-4 p-6 md:p-8">
+                <h3 className="text-label uppercase">{servicesPage.listLabel}</h3>
+                <ul className="grid gap-3 sm:grid-cols-2">
+                  {s.items.map((item) => (
+                    <li key={item} className="flex gap-2">
+                      <Check aria-hidden="true" strokeWidth={3} className="mt-1 size-4 shrink-0 text-ink" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="brutal brutal-static on-primary flex flex-col gap-2 p-6 md:p-8">
+                <h3 className="text-label uppercase">{servicesPage.deliverablesLabel}</h3>
+                <p className="text-body">{s.deliverables}</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      ))}
+
+      <ConsultationBand showServicesLink={false} />
     </>
   );
 }

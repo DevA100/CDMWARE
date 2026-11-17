@@ -25,6 +25,42 @@
   to = "/"
   status = 301
 
+# Routes removed in the 2026 content rebuild → their new homes.
+[[redirects]]
+  from = "/industries"
+  to = "/who-we-serve"
+  status = 301
+
+[[redirects]]
+  from = "/case-studies"
+  to = "/our-work"
+  status = 301
+
+[[redirects]]
+  from = "/case-studies/*"
+  to = "/our-work"
+  status = 301
+
+[[redirects]]
+  from = "/services/software-web-development"
+  to = "/services#ai-powered-engineering"
+  status = 301
+
+[[redirects]]
+  from = "/services/creative-design"
+  to = "/services"
+  status = 301
+
+[[redirects]]
+  from = "/services/digital-marketing"
+  to = "/services"
+  status = 301
+
+[[redirects]]
+  from = "/services/it-consulting"
+  to = "/services#digital-innovation"
+  status = 301
+
 [[headers]]
   for = "/*"
   [headers.values]

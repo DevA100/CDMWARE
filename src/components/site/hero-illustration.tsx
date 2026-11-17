@@ -1,6 +1,6 @@
 /**
  * Hero artwork: a browser window with a dashboard and code, joined by the
- * circuit traces from the CDMWare logo. Colours come from theme variables.
+ * circuit traces from the CDMware logo. Colours come from theme variables.
  */
 export function HeroIllustration() {
   return (

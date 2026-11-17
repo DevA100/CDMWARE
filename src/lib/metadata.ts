@@ -13,27 +13,26 @@ export function siteUrl(): URL {
   return new URL(netlifyUrl || site.url);
 }
 
-export const homeTitle = `${site.name} — AI-Powered Software, Design & Digital Marketing`;
-
 type PageMetadataInput = {
-  /** The page name, e.g. "About Us". The home page passes the full homeTitle. */
+  /** The complete SEO title, e.g. "About CDMware | Innovation & Technology". Used as-is. */
   title: string;
   description: string;
-  /** The route path, e.g. "/about" or "/services/creative-design". */
+  /** The route path, e.g. "/about" or "/our-work/some-project". */
   path: string;
 };
 
 /**
  * Title, description, canonical URL, Open Graph and Twitter tags for one page.
  *
+ * The SEO titles already include the brand, so the title is set as
+ * `absolute` and the layout's "%s | CDMware" template doesn't apply.
  * Metadata merges shallowly, so a page that sets `openGraph` replaces the
  * layout's object entirely. This helper always returns the full object.
  * og:image and twitter:image come from the route's opengraph-image.tsx file.
  */
 export function pageMetadata({ title, description, path }: PageMetadataInput): Metadata {
-  const fullTitle = path === "/" ? title : `${title} | ${site.name}`;
   return {
-    title: { absolute: fullTitle },
+    title: { absolute: title },
     description,
     alternates: { canonical: path },
     openGraph: {
@@ -41,12 +40,12 @@ export function pageMetadata({ title, description, path }: PageMetadataInput): M
       siteName: site.name,
       locale: "en_NG",
       url: path,
-      title: fullTitle,
+      title,
       description,
     },
     twitter: {
       card: "summary_large_image",
-      title: fullTitle,
+      title,
       description,
     },
   };

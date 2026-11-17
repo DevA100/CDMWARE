@@ -7,6 +7,7 @@ type HeroProps = {
   /** A small line or sticker Badge above the headline (e.g. "Early bird"). */
   eyebrow?: ReactNode;
   headline: ReactNode;
+  /** A string renders as one paragraph; pass elements (e.g. several <p>) for more. */
   lede?: ReactNode;
   /** A small line under the buttons (e.g. a support link). */
   footnote?: ReactNode;
@@ -77,7 +78,12 @@ export function CruiseHero({
         <div className="flex flex-col items-start gap-6">
           {eyebrow && <div>{eyebrow}</div>}
           <h1 className="text-hero [overflow-wrap:anywhere] xl:text-(length:--hero-size)">{headline}</h1>
-          {lede && <p className="max-w-(--measure) text-body">{lede}</p>}
+          {lede &&
+            (typeof lede === "string" ? (
+              <p className="max-w-(--measure) text-body">{lede}</p>
+            ) : (
+              <div className="flex max-w-(--measure) flex-col gap-4 text-body">{lede}</div>
+            ))}
           {actions && <CruiseButtonGroup>{actions}</CruiseButtonGroup>}
           {footnote && <div className="-mt-1 text-small">{footnote}</div>}
         </div>
