@@ -21,6 +21,9 @@ type HeroProps = {
    * would otherwise stretch across its column. Default: the frame fills its
    * column on wide screens. */
   illustrationMaxWidth?: number;
+  /** CDMware addition: false shows the illustration on its own, without the
+   * white tilted card around it. Default true (the Cruise UI look). */
+  illustrationFrame?: boolean;
   /** Optional ghost word (A6): one oversized decorative word behind the
    * copy, cropped by the section edge. Max one per page. From 1280px it is
    * anchored to the content container, so on wide screens it stays behind
@@ -40,6 +43,7 @@ export function CruiseHero({
   actions,
   illustration,
   illustrationMaxWidth,
+  illustrationFrame = true,
   ghostWord,
   ghostFit,
   className,
@@ -93,7 +97,8 @@ export function CruiseHero({
           // container leaves no empty gap between text and picture.
           <div
             className={cx(
-              "brutal brutal-static mx-auto w-full max-w-md rotate-2 p-4 lg:max-w-none xl:max-w-[calc(var(--hero-size)*7)] 2xl:max-w-none",
+              "mx-auto w-full max-w-md lg:max-w-none xl:max-w-[calc(var(--hero-size)*7)] 2xl:max-w-none",
+              illustrationFrame && "brutal brutal-static rotate-2 p-4",
               illustrationMaxWidth !== undefined && "lg:mr-0",
             )}
             // Inline, so it wins over the responsive max-width classes.

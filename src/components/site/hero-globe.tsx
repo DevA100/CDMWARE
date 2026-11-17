@@ -69,10 +69,8 @@ export function HeroGlobe() {
       aria-label="A globe with web, mobile, AI and code icons orbiting around it"
       className="h-auto w-full"
     >
-      <rect width="480" height="380" fill={sky} />
-
       {/* background sparkles */}
-      <g fill={gold} stroke={navy} strokeWidth="3" strokeLinejoin="round">
+      <g fill="#fff" stroke={navy} strokeWidth="3" strokeLinejoin="round">
         <path d="M60 52l6 15 15 6-15 6-6 15-6-15-15-6 15-6z" />
         <path d="M418 300l5 11 11 5-11 5-5 11-5-11-11-5 11-5z" />
       </g>

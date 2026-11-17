@@ -47,6 +47,7 @@ export default function HomePage() {
           </>
         }
         illustration={<HeroGlobe />}
+        illustrationFrame={false}
         ghostWord="CDM"
       />
 
